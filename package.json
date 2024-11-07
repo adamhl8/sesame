@@ -1,0 +1,57 @@
+{
+  "name": "sesame",
+  "type": "module",
+  "version": "0.1.0",
+  "exports": {
+    ".": "./dist/index.ts",
+    "./types": "./dist/types.ts",
+    "./plugin": "./dist/plugin.ts",
+    "./plugins": "./dist/plugins/index.ts",
+    "./lib": "./dist/lib.ts"
+  },
+  "description": "Declarative, extensible, agentless Infrastructure as Code in TypeScript/Bun",
+  "author": {
+    "email": "adamhl@pm.me",
+    "name": "Adam Langbert",
+    "url": "https://github.com/adamhl8"
+  },
+  "homepage": "https://github.com/adamhl8/sesame",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamhl8/sesame"
+  },
+  "bugs": {
+    "url": "https://github.com/adamhl8/sesame/issues"
+  },
+  "license": "MIT",
+  "keywords": ["bun", "typescript", "infra", "infrastructure", "infrastructure as code", "iac"],
+  "files": ["dist/"],
+  "scripts": {
+    "lint": "tsc --noEmit && biome check --write . && eslint .",
+    "dist": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.9.0",
+    "cli-highlight": "^2.1.11",
+    "figures": "^6.1.0",
+    "lowdb": "^7.0.1",
+    "signale": "^1.4.0",
+    "ts-error-tuple": "^0.2.0",
+    "type-fest": "^4.30.2",
+    "untildify": "^5.0.0",
+    "valibot": "v1.0.0-beta.9"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@eslint/js": "^9.17.0",
+    "@types/bun": "^1.1.14",
+    "@types/eslint__js": "^8.42.3",
+    "@types/signale": "^1.4.7",
+    "eslint": "^9.17.0",
+    "eslint-config-biome": "^1.9.4",
+    "globals": "^15.13.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.1"
+  },
+  "trustedDependencies": ["@biomejs/biome"]
+}
