@@ -24,17 +24,8 @@
     "url": "https://github.com/adamhl8/sesame/issues"
   },
   "license": "MIT",
-  "keywords": [
-    "bun",
-    "typescript",
-    "infra",
-    "infrastructure",
-    "infrastructure as code",
-    "iac"
-  ],
-  "files": [
-    "dist/"
-  ],
+  "keywords": ["bun", "typescript", "infra", "infrastructure", "infrastructure as code", "iac"],
+  "files": ["dist/"],
   "scripts": {
     "lint": "tsc --noEmit && biome check --write . && eslint .",
     "dist": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts"
@@ -62,7 +53,5 @@
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.1"
   },
-  "trustedDependencies": [
-    "@biomejs/biome"
-  ]
+  "trustedDependencies": ["@biomejs/biome"]
 }
