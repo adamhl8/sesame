@@ -2,7 +2,7 @@
 import { rm } from "node:fs/promises"
 import util from "node:util"
 import { db } from "@/db.ts"
-import { sudo } from "@/lib.ts"
+// import { sudo } from "@/lib.ts"
 import { logger } from "@/logger.ts"
 import type { Plugin, PluginDetails } from "@/plugin.ts"
 import { type BunInfraConfig, BunInfraSchema, type HostContext, HostContextSchema } from "@/types.ts"
@@ -129,7 +129,7 @@ async function main(sesameConfig: BunInfraConfig) {
       arch: process.arch,
       os: process.platform,
       logger: hostLogger,
-      sudo: await sudo(host),
+      sudo: { raw: "" },
     })
     if (!result.success) {
       hostLogger.fatal("Failed to build context for host")
