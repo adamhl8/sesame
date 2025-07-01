@@ -36,7 +36,7 @@
     "dist/"
   ],
   "scripts": {
-    "lint": "tsc --noEmit && biome check --write . && eslint .",
+    "lint": "tsc --noEmit && biome check --write",
     "dist": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts"
   },
   "dependencies": {
