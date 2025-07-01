@@ -1,6 +1,5 @@
 {
   "extends": "@adamhl8/configs/tsconfig",
-  "include": ["src", "tests", "scripts"],
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
