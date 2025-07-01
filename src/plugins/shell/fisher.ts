@@ -1,6 +1,6 @@
-import { getAddedRemovedDiff } from "@/lib.ts"
+import { getAddedRemovedDiff } from "@/plugins/lib/lib"
 import { createPlugin } from "@/plugin.ts"
-import { runFishCmd } from "@/utils/utils.ts"
+import { runFishCmd } from "@/core/lib/utils"
 
 interface FisherDiff {
   isFisherInstalled: boolean

@@ -18,6 +18,7 @@ function kebabToCamel(str: string): Result<string> {
 async function getPluginFilePaths(): Promise<string[]> {
   const glob = new Bun.Glob("**/*.ts")
   const pluginFilePaths = await Array.fromAsync(glob.scan({ cwd: PLUGINS_DIR }))
+  // todo: exclude lib
   return pluginFilePaths.filter((path) => path !== "index.ts")
 }
 

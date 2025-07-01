@@ -1,6 +1,6 @@
 import { createPlugin } from "@/plugin.ts"
 import type { HostContext } from "@/types.ts"
-import { installAppFromZip } from "@/utils/utils.ts"
+import { installAppFromZip } from "@/core/lib/utils"
 import { $ } from "bun"
 
 async function useKekaHelper(ctx: HostContext) {

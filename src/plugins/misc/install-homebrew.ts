@@ -1,4 +1,4 @@
-import { requestRestart } from "@/lib.ts"
+import { requestRestart } from "@/plugins/lib/lib"
 import { createPlugin } from "@/plugin.ts"
 import { $ } from "bun"
 

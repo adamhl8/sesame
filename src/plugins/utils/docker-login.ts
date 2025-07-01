@@ -1,4 +1,4 @@
-import { getSopsSecret } from "@/lib.ts"
+import { getSopsSecret } from "@/plugins/lib/lib"
 import { createPlugin } from "@/plugin.ts"
 import { $ } from "bun"
 

@@ -1,4 +1,4 @@
-import { resolvePath } from "@/lib.ts"
+import { resolvePath } from "@/core/lib/path"
 import { createPlugin } from "@/plugin.ts"
 import { $ } from "bun"
 

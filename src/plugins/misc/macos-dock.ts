@@ -1,4 +1,4 @@
-import { getAddedRemovedDiff } from "@/lib.ts"
+import { getAddedRemovedDiff } from "@/plugins/lib/lib"
 import { createPlugin } from "@/plugin.ts"
 import { $ } from "bun"
 

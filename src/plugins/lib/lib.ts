@@ -1,18 +1,12 @@
-import type { Logger } from "@/logger.ts"
+import { resolvePath } from "@/core/lib/path"
+import type { ClackLogger } from "@/core/logger"
 import { $ } from "bun"
-import untildify from "untildify"
 
 async function getSopsSecret(pathString: string) {
   const keys = pathString.split(".").join("']['")
-  return (await $`sops -d --extract "['${{ raw: keys }}']" ${await resolvePath("./configs/secrets.yaml")}`.quiet())
+  return (await $`sops -d --extract "['${{ raw: keys }}']" ${resolvePath("./configs/secrets.yaml")}`.quiet())
     .text()
     .trim()
-}
-
-async function resolvePath(path: string) {
-  const untildified = untildify(path)
-  const rawPath = { raw: untildified }
-  return (await $`realpath --canonicalize-missing --no-symlinks "${rawPath}"`.quiet().text()).trim()
 }
 
 function getAddedRemovedDiff(input: string[], current: string[]) {
@@ -27,7 +21,7 @@ function getAddedRemovedDiff(input: string[], current: string[]) {
 
 const EX_TEMPFAIL = 75
 
-function requestRestart(logger: Logger, message: string) {
+function requestRestart(logger: ClackLogger, message: string) {
   logger.warn(message)
   process.exit(EX_TEMPFAIL)
 }
@@ -37,4 +31,15 @@ async function sudo(host: string) {
   return { raw: `echo ${sudoPassword} | sudo -S -p '' --` }
 }
 
-export { resolvePath, getAddedRemovedDiff, requestRestart, getSopsSecret, sudo }
+async function installAppFromZip(downloadUrl: string) {
+  const zipPath = await resolvePath("~/tmp_hl_download.zip")
+  await $`curl -Lo ${zipPath} ${downloadUrl}`.quiet()
+  await $`unzip -o -q ${zipPath} -d /Applications/`.quiet()
+  await $`rm ${zipPath}`.quiet()
+}
+
+function runFishCmd(cmd: string) {
+  return $`fish -l -c ${cmd}`
+}
+
+export { getAddedRemovedDiff, requestRestart, getSopsSecret, sudo }

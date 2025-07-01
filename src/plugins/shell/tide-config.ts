@@ -1,5 +1,5 @@
 import { createPlugin } from "@/plugin.ts"
-import { runFishCmd } from "@/utils/utils.ts"
+import { runFishCmd } from "@/core/lib/utils"
 
 const tideConfig = createPlugin<string, true>(
   { name: "Tide Config", printDiff: false },
