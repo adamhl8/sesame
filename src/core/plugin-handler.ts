@@ -2,7 +2,7 @@ import { db } from "@/core/state-db.ts"
 import { stringify } from "@/core/lib/utils.ts"
 import { attempt, err, isErr, errWithCtx, type Result } from "ts-explicit-errors"
 
-import type { PluginInstance } from "./config/schema.ts"
+import type { PluginInstance } from "@/core/config/schema.ts"
 import type { JsonValue } from "type-fest"
 import type { PluginContext } from "@/core/main.ts"
 
