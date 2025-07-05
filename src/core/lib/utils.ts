@@ -1,6 +1,6 @@
-import { resolvePath } from "@/core/lib/path"
+import { resolvePath } from "@/core/lib/path.ts"
 import { $ } from "bun"
-import util from "node:util"
+import * as util from "node:util"
 
 function stringify(value: unknown) {
   return util.inspect(value, { depth: null, colors: true, maxArrayLength: null, maxStringLength: null })

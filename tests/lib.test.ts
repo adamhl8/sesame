@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import os from "node:os"
-import { resolvePath } from "@/core/lib/path"
+import * as os from "node:os"
+import { resolvePath } from "@/core/lib/path.ts"
 
 describe("resolvePath", () => {
   const homeDir = os.homedir()

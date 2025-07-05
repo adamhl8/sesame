@@ -11,7 +11,7 @@
         "lowdb": "^7.0.1",
         "picocolors": "^1.1.1",
         "signale": "^1.4.0",
-        "ts-error-tuple": "^1.0.0",
+        "ts-explicit-errors": "^2.2.0",
         "type-fest": "^4.41.0",
         "untildify": "^5.0.0",
         "valibot": "v1.0.0-beta.9",
@@ -195,7 +195,7 @@
 
     "thenify-all": ["thenify-all@1.6.0", "", { "dependencies": { "thenify": ">= 3.1.0 < 4" } }, "sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA=="],
 
-    "ts-error-tuple": ["ts-error-tuple@1.0.0", "", {}, "sha512-XABfEDEtOM9pwH1PhOsu41YUEu2698U6kE32hywdTk0/qY2Kxk8L0xzs990ZbOTSqTHoaonQ20Ag1Gaw6u3ykQ=="],
+    "ts-explicit-errors": ["ts-explicit-errors@2.2.0", "", {}, "sha512-Xav/9xn3Rc7R5ED0xF99OpRXyReRfcREgHitkok7pnXy9hkO4w32557zUFVpTdoeOhvOpOvLHTvS4IR39wxrKg=="],
 
     "tslib": ["tslib@2.8.1", "", {}, "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="],
 

@@ -1,8 +1,8 @@
-import { resolvePath } from "@/core/lib/path"
+import { resolvePath } from "@/core/lib/path.ts"
 import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
-import fs from "node:fs/promises"
-import path from "node:path"
+import * as fs from "node:fs/promises"
+import * as path from "node:path"
 
 interface Link {
   source: string

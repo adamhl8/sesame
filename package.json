@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "lint": "tsc --noEmit && biome check --write",
-    "dist": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts"
+    "bundle": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts"
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",
@@ -47,7 +47,7 @@
     "lowdb": "^7.0.1",
     "picocolors": "^1.1.1",
     "signale": "^1.4.0",
-    "ts-error-tuple": "^1.0.0",
+    "ts-explicit-errors": "^2.2.0",
     "type-fest": "^4.41.0",
     "untildify": "^5.0.0",
     "valibot": "v1.0.0-beta.9"
