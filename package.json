@@ -24,17 +24,8 @@
     "./plugins": "./dist/plugins/index.ts",
     "./lib": "./dist/lib.ts"
   },
-  "files": [
-    "dist/"
-  ],
-  "keywords": [
-    "bun",
-    "typescript",
-    "infra",
-    "infrastructure",
-    "infrastructure as code",
-    "iac"
-  ],
+  "files": ["dist/"],
+  "keywords": ["bun", "typescript", "infra", "infrastructure", "infrastructure as code", "iac"],
   "scripts": {
     "bundle": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts",
     "lint": "tsc --noEmit && biome check --write",
