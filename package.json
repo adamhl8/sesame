@@ -24,8 +24,17 @@
     "./plugins": "./dist/plugins/index.ts",
     "./lib": "./dist/lib.ts"
   },
-  "files": ["dist/"],
-  "keywords": ["bun", "typescript", "infra", "infrastructure", "infrastructure as code", "iac"],
+  "files": [
+    "dist/"
+  ],
+  "keywords": [
+    "bun",
+    "typescript",
+    "infra",
+    "infrastructure",
+    "infrastructure as code",
+    "iac"
+  ],
   "scripts": {
     "bundle": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts",
     "lint": "tsc --noEmit && biome check --write",
@@ -46,7 +55,7 @@
   },
   "devDependencies": {
     "@adamhl8/configs": "^0.9.0",
-    "@biomejs/biome": "^2.0.6",
+    "@biomejs/biome": "^2.1.1",
     "@types/bun": "^1.2.18",
     "@types/signale": "^1.4.7",
     "typescript": "^5.8.3"
