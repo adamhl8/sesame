@@ -54,7 +54,7 @@
 		"valibot": "v1.0.0-beta.9"
 	},
 	"devDependencies": {
-		"@adamhl8/configs": "^0.15.19",
+		"@adamhl8/configs": "^0.15.20",
 		"@biomejs/biome": "^2.2.4",
 		"@types/bun": "^1.2.22",
 		"@types/signale": "^1.4.7",
