@@ -28,7 +28,7 @@
   "keywords": ["bun", "typescript", "infra", "infrastructure", "infrastructure as code", "iac"],
   "scripts": {
     "bundle": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts",
-    "lint": "tsc --noEmit && biome check --write",
+    "lint": "markdown-toc -i --bullets '-' --maxdepth 3 ./README.md && tsc --noEmit && biome check --write && adamhl8-knip",
     "prepare": "find .githooks -type f -exec ln -srf {} .git/hooks/ \\; || true"
   },
   "dependencies": {
