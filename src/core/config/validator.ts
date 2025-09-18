@@ -35,15 +35,16 @@ function validateConfig(config: SesameConfig): Result<ValidatedConfig> {
   return validatedConfig as ValidatedConfig
 }
 
+const pluginRegex = /^(?<host>[^.]+)\.plugins\[(?<index>\d+)\]/v
 function prependPluginValidationErrorWithPluginName(errorMessage: string, config: SesameConfig) {
   // We are working with something like: host1.plugins[0].diff must be a function (was string)
-  const pluginMatch = /^(?<host>[^.]+)\.plugins\[(?<index>\d+)\]/v.exec(errorMessage)
+  const pluginMatch = pluginRegex.exec(errorMessage)
   if (!pluginMatch?.groups) return errorMessage
 
   const { host, index } = pluginMatch.groups
   if (!(host && index)) return errorMessage
 
-  const pluginName = config[host]?.plugins[Number.parseInt(index)]?.details.name
+  const pluginName = config[host]?.plugins[Number.parseInt(index, 10)]?.details.name
   if (!pluginName) return errorMessage
 
   return `(${pluginName}) ${errorMessage}`

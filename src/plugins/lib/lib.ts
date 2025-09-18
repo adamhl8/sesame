@@ -28,10 +28,10 @@ function requestRestart(logger: ClackLogger, message: string) {
   process.exit(EX_TEMPFAIL)
 }
 
-async function sudo(host: string) {
-  const sudoPassword = await getSopsSecret(`sesame.${host}.sudo_password`)
-  return { raw: `echo ${sudoPassword} | sudo -S -p '' --` }
-}
+// async function sudo(host: string) {
+//   const sudoPassword = await getSopsSecret(`sesame.${host}.sudo_password`)
+//   return { raw: `echo ${sudoPassword} | sudo -S -p '' --` }
+// }
 
 export async function installAppFromZip(downloadUrl: string) {
   const zipPath = await resolvePath("~/tmp_hl_download.zip")
@@ -44,4 +44,4 @@ function runFishCmd(cmd: string) {
   return $`fish -l -c ${cmd}`
 }
 
-export { getAddedRemovedDiff, requestRestart, getSopsSecret, sudo, runFishCmd }
+export { getAddedRemovedDiff, requestRestart, getSopsSecret, runFishCmd }

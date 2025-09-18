@@ -1,6 +1,8 @@
 import { cli } from "cleye"
+import type { Result } from "ts-explicit-errors"
+import { err } from "ts-explicit-errors"
+
 import type { SesameConfig } from "@/core/config/schema.ts"
-import { err, type Result } from "ts-explicit-errors"
 
 interface CliArgs {
   hosts: string[]
@@ -27,7 +29,7 @@ function parseCliArgs(config: SesameConfig): Result<CliArgs> {
 
   for (const host of hosts) {
     if (!Object.hasOwn(config, host)) {
-      return err(`host '${host}' not found in config`)
+      return err(`host '${host}' not found in config`, undefined)
     }
   }
 

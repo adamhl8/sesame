@@ -32,6 +32,7 @@ type PluginUpdate = (ctx: PluginContext) => AsyncOrSync<void>
   So when passing in a PluginInstance (which, for example, might be typed as <string, string, string>) to the plugins array,
   TypeScript correctly complains that <string, string, string> is not assignable to <unknown, unknown, unknown>.
 */
+// biome-ignore lint/suspicious/noExplicitAny: ignore
 interface PluginInstance<Input = any, TInput = Input, Diff = any> {
   details: PluginDetails
   input: PluginInput<Input>
@@ -85,13 +86,4 @@ const sesameConfigSchema = type
 type SesameConfig = typeof sesameConfigSchema.infer
 
 export { sesameConfigSchema }
-export type {
-  PluginDetails,
-  PluginDiff,
-  PluginHandle,
-  PluginInput,
-  PluginInstance,
-  PluginTransform,
-  PluginUpdate,
-  SesameConfig,
-}
+export type { PluginDetails, PluginDiff, PluginHandle, PluginInstance, PluginTransform, PluginUpdate, SesameConfig }

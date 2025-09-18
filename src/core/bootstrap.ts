@@ -1,7 +1,9 @@
-import { spawnSync } from "bun"
-import { attempt, err, isErr, type Result } from "ts-explicit-errors"
 import { rm } from "node:fs/promises"
 import path from "node:path"
+import process from "node:process"
+import { spawnSync } from "bun"
+import type { Result } from "ts-explicit-errors"
+import { attempt, err, isErr } from "ts-explicit-errors"
 
 /**
  * @returns wip
@@ -36,7 +38,7 @@ async function bootstrap(): Promise<Result> {
     const errorMessage = stderrString.startsWith("error: ModuleNotFound")
       ? "failed to compile sesame binary: 'sesame.ts' not found (sesame() must be called from a file named 'sesame.ts')"
       : "failed to compile sesame binary"
-    return err(errorMessage, stderrString)
+    return err(`${errorMessage}: ${stderrString}`, undefined)
   }
 
   const sesameResult = attempt(() =>

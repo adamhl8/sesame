@@ -1,5 +1,6 @@
-import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
+
+import { PluginBuilder } from "@/core/plugin/builder.ts"
 
 const fnm = PluginBuilder.new<null>({ name: "fnm" })
   .diff<true>((_, previous) => (previous === null ? undefined : true))

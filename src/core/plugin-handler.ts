@@ -36,7 +36,7 @@ async function getInput(plugin: PluginInstance): Promise<Result<JsonValue>> {
   if (isErr(input)) return input
   // if input is nullish, we set it to null because null is a valid JSON value
   input ??= null
-  if (!isValidJsonValue(input)) return err("input is not valid JSON")
+  if (!isValidJsonValue(input)) return err("input is not valid JSON", undefined)
 
   return input
 }
@@ -54,7 +54,7 @@ async function getDiff(plugin: PluginInstance, context: PluginContext, input: Js
   const previous = db.get(host, plugin.details.name)
 
   const diff = await attempt(async () => {
-    if (!plugin.diff) return err("diff function is undefined")
+    if (!plugin.diff) return err("diff function is undefined", undefined)
     return (await plugin.diff(context, previous, input)) as unknown
   })
 

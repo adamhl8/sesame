@@ -16,7 +16,7 @@ describe("bootstrap", () => {
     const error = await bootstrap()
     expectErr(error)
 
-    expect(error.fmtErr()).toStartWith(
+    expect(error.messageChain).toStartWith(
       "failed to compile sesame binary: 'sesame.ts' not found (sesame() must be called from a file named 'sesame.ts') -> error: ModuleNotFound resolving",
     )
   })

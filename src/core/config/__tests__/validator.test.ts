@@ -11,7 +11,7 @@ describe("validateConfig", () => {
       const error = validateConfig({})
       expectErr(error)
 
-      expect(error.fmtErr()).toBe("must be an object of only host config objects (was {})")
+      expect(error.messageChain).toBe("must be an object of only host config objects (was {})")
     })
 
     test("returns error with expected multiline message", () => {
@@ -22,14 +22,14 @@ describe("validateConfig", () => {
       const error = validateConfig(invalidConfig)
       expectErr(error)
 
-      expect(error.fmtErr()).toBe(
+      expect(error.messageChain).toBe(
         ["", "host1.host must be a string (was a number)", "host1.user must be a string (was a number)"].join("\n"),
       )
     })
 
     test("prepends plugin validation errors with plugin name", () => {
-      const plugin1 = PluginBuilder.new({ name: "plugin1" }).build()
-      const plugin2 = PluginBuilder.new({ name: "plugin2" }).build()
+      const plugin1 = PluginBuilder.new<string>({ name: "plugin1" }).build()
+      const plugin2 = PluginBuilder.new<string>({ name: "plugin2" }).build()
 
       const invalidConfig = {
         host1: { host: "host1", plugins: [plugin1("input"), plugin2("input")] },
@@ -38,7 +38,7 @@ describe("validateConfig", () => {
       const error = validateConfig(invalidConfig)
       expectErr(error)
 
-      expect(error.fmtErr()).toBe(
+      expect(error.messageChain).toBe(
         [
           "",
           "(plugin1) host1.plugins[0].diff must be a function (was undefined)",
@@ -57,16 +57,16 @@ describe("validateConfig", () => {
       const error = validateConfig(invalidConfig)
       expectErr(error)
 
-      expect(error.fmtErr()).toBe("host1.plugins must be non-empty")
+      expect(error.messageChain).toBe("host1.plugins must be non-empty")
     })
 
     test("returns error with expected message when duplicate plugin names are found", () => {
-      const plugin1 = PluginBuilder.new({ name: "plugin1" })
+      const plugin1 = PluginBuilder.new<string>({ name: "plugin1" })
         .diff(() => void 0)
         .handle(() => void 0)
         .build()
 
-      const plugin2 = PluginBuilder.new({ name: "plugin1" })
+      const plugin2 = PluginBuilder.new<string>({ name: "plugin1" })
         .diff(() => void 0)
         .handle(() => void 0)
         .build()
@@ -78,7 +78,7 @@ describe("validateConfig", () => {
       const error = validateConfig(invalidConfig)
       expectErr(error)
 
-      expect(error.fmtErr()).toBe("duplicate plugin found for host1.plugins: plugin1")
+      expect(error.messageChain).toBe("duplicate plugin found for host1.plugins: plugin1")
     })
   })
 })

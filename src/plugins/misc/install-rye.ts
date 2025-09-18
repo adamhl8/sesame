@@ -1,7 +1,8 @@
 import os from "node:os"
 import path from "node:path"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
+
+import { PluginBuilder } from "@/core/plugin/builder.ts"
 
 interface InstallRyeOptions {
   pythonVersion?: string

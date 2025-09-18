@@ -1,5 +1,7 @@
 import path from "node:path"
-import { type Err, type Result, attempt, fmtError } from "ts-error-tuple"
+import process from "node:process"
+import type { Result } from "ts-explicit-errors"
+import { attempt, err, isErr } from "ts-explicit-errors"
 
 const PLUGINS_DIR = "src/plugins"
 const PLUGIN_INDEX_FILE = "src/plugins/index.ts"
@@ -18,29 +20,33 @@ function kebabToCamel(str: string): Result<string> {
 async function getPluginFilePaths(): Promise<string[]> {
   const glob = new Bun.Glob("**/*.ts")
   const pluginFilePaths = await Array.fromAsync(glob.scan({ cwd: PLUGINS_DIR }))
-  // todo: exclude lib
-  return pluginFilePaths.filter((path) => path !== "index.ts")
+
+  return pluginFilePaths.filter((pluginFilePath) => {
+    if (pluginFilePath === "index.ts") return false
+    if (pluginFilePath.startsWith("lib/")) return false
+    return true
+  })
 }
 
-async function generatePluginIndex(): Promise<Err> {
-  const [pluginFilePaths, err] = await attempt(getPluginFilePaths)
-  if (err) return fmtError("failed to get plugin file names", err)
+async function generatePluginIndex(): Promise<Result> {
+  const pluginFilePaths = await attempt(getPluginFilePaths)
+  if (isErr(pluginFilePaths)) return err("failed to get plugin file names", pluginFilePaths)
 
   const exports: string[] = []
   for (const pluginFilePath of pluginFilePaths) {
     const pluginFileName = path.basename(pluginFilePath, ".ts")
-    const [exportName, err] = kebabToCamel(pluginFileName)
-    if (err) return fmtError("failed to convert plugin name to camel case", err)
+    const camelPluginFileName = kebabToCamel(pluginFileName)
+    if (isErr(camelPluginFileName)) return err("failed to convert plugin name to camel case", camelPluginFileName)
 
-    exports.push(`export { ${exportName} } from "./${pluginFilePath}"`)
+    exports.push(`export { ${camelPluginFileName} } from "./${pluginFilePath}"`)
   }
 
-  const [, bunWriteErr] = await attempt(() => Bun.write(PLUGIN_INDEX_FILE, `${exports.join("\n")}\n`))
-  if (bunWriteErr) return fmtError("failed to write plugin index file", bunWriteErr)
+  const writeResult = await attempt(() => Bun.write(PLUGIN_INDEX_FILE, `${exports.join("\n")}\n`))
+  if (isErr(writeResult)) return err("failed to write plugin index file", writeResult)
 }
 
-const err = await generatePluginIndex()
-if (err) {
-  console.error(fmtError("failed to generate plugin index", err).message)
+const generatePluginIndexResult = await generatePluginIndex()
+if (isErr(generatePluginIndexResult)) {
+  console.error(`failed to generate plugin index: ${generatePluginIndexResult.messageChain}`)
   process.exit(1)
 }

@@ -34,7 +34,7 @@ interface LogObjForClackMessage {
 
 type LogObject = LogObjForClackBuiltin | LogObjForClackMessage
 
-export interface LoggerOptions {
+interface LoggerOptions {
   scope?: string[]
 }
 
@@ -153,11 +153,9 @@ class ClackLogger {
   public async continue(message: string): Promise<Result<boolean>> {
     const shouldContinue = await confirm({ message })
 
-    if (isCancel(shouldContinue)) return err("canceled")
+    if (isCancel(shouldContinue)) return err("canceled", undefined)
     return shouldContinue
   }
 }
 
 export { ClackLogger }
-
-const logger = new ClackLogger()

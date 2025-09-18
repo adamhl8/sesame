@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, expect, jest, mock, spyOn, test } from "bun:test"
+import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from "bun:test"
 import { expectTypeOf } from "expect-type"
 import type { JsonValue } from "type-fest"
 
@@ -21,7 +21,7 @@ describe("plugin-handler", () => {
       const input = await getInput(pluginInstance)
       expectErr(input)
 
-      expect(input.fmtErr()).toBe("input error")
+      expect(input.messageChain).toBe("input error")
     })
 
     test("returns expected error when plugin.transform() throws", async () => {
@@ -35,7 +35,7 @@ describe("plugin-handler", () => {
       const input = await getInput(pluginInstance)
       expectErr(input)
 
-      expect(input.fmtErr()).toBe("transform error")
+      expect(input.messageChain).toBe("transform error")
     })
 
     test("returns expected error when input is not valid JSON", async () => {
@@ -45,7 +45,7 @@ describe("plugin-handler", () => {
       const input = await getInput(pluginInstance)
       expectErr(input)
 
-      expect(input.fmtErr()).toBe("input is not valid JSON")
+      expect(input.messageChain).toBe("input is not valid JSON")
     })
 
     test("converts undefined input to null", async () => {
@@ -88,7 +88,7 @@ describe("plugin-handler", () => {
 
       expectErr(diff)
 
-      expect(diff.fmtErr()).toBe("diff function is undefined")
+      expect(diff.messageChain).toBe("diff function is undefined")
     })
 
     test("returns expected error when plugin.diff() throws", async () => {
@@ -102,7 +102,7 @@ describe("plugin-handler", () => {
       const diff = await getDiff(pluginInstance, { hostCtx: { host: "foo" } } as PluginContext, {})
       expectErr(diff)
 
-      expect(diff.fmtErr()).toBe("diff error")
+      expect(diff.messageChain).toBe("diff error")
     })
 
     test("returns diff", async () => {

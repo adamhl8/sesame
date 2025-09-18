@@ -1,34 +1,11 @@
-import type { Mock } from "bun:test"
-import { afterEach, beforeEach, describe, expect, jest, spyOn, test } from "bun:test"
-import fs from "node:fs/promises"
-import type { CtxError, Result } from "ts-explicit-errors"
-import { err, isErr } from "ts-explicit-errors"
+import { describe, expect, spyOn, test } from "bun:test"
+import { err } from "ts-explicit-errors"
 
-import { bootstrap } from "@/core/bootstrap.ts"
 import * as cli from "@/core/cli.ts"
 import * as validator from "@/core/config/validator.ts"
 import { ClackLogger } from "@/core/logger.ts"
 import { main } from "@/core/main.ts"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
-
-function createMockLogger() {
-  return {
-    intro: jest.fn(),
-    outro: jest.fn(),
-    info: jest.fn(),
-    success: jest.fn(),
-    warn: jest.fn(),
-    error: jest.fn(),
-    diff: jest.fn(),
-    noDiff: jest.fn(),
-    start: jest.fn(),
-    scope: jest.fn(),
-  }
-}
-
-function expectErr<T>(result: Result<T>): asserts result is CtxError {
-  expect(isErr(result)).toBe(true)
-}
+import { expectErr } from "~/__tests__/utils"
 
 const logger = new ClackLogger()
 
@@ -39,17 +16,17 @@ describe("main", () => {
     const error = await main(config, logger)
     expectErr(error)
 
-    expect(error.fmtErr()).toStartWith("invalid config")
+    expect(error.messageChain).toStartWith("invalid config")
   })
 
   test("returns expected error when CLI args are invalid", async () => {
     spyOn(validator, "validateConfig").mockImplementation(() => void 0 as never)
-    spyOn(cli, "parseCliArgs").mockImplementation(() => err("parseCliArgs error"))
+    spyOn(cli, "parseCliArgs").mockImplementation(() => err("parseCliArgs error", undefined))
 
     const error = await main({}, logger)
     expectErr(error)
 
-    expect(error.fmtErr()).toBe("failed to parse CLI args -> parseCliArgs error")
+    expect(error.messageChain).toBe("failed to parse CLI args -> parseCliArgs error")
   })
 
   test("logs intro message", async () => {

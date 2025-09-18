@@ -1,5 +1,6 @@
-import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
+
+import { PluginBuilder } from "@/core/plugin/builder.ts"
 
 interface DefaultFileViewerDiff {
   fileViewer?: { old: string }

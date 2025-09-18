@@ -4,7 +4,6 @@ import type { Result } from "ts-explicit-errors"
 
 import { bootstrap } from "@/core/bootstrap.ts"
 import type { SesameConfig } from "@/core/config/schema.ts"
-// import { sudo } from "@/lib.ts"
 import { ClackLogger } from "@/core/logger.ts"
 import { main } from "@/core/main.ts"
 

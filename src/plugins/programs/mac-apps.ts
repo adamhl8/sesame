@@ -1,6 +1,7 @@
-import { getAddedRemovedDiff } from "@/plugins/lib/lib"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
+
+import { PluginBuilder } from "@/core/plugin/builder.ts"
+import { getAddedRemovedDiff } from "@/plugins/lib/lib"
 
 type AppInfo = readonly [string, string]
 
@@ -24,9 +25,7 @@ const macApps = PluginBuilder.new<string[]>({ name: "Mac Apps" })
     const diff = getAddedRemovedDiff(appIds, current)
     if (!diff) return
 
-    const getAppName = async (appId: string) => {
-      return (await $`mas info ${appId}`.quiet()).text().trim().split("\n")[0] ?? ""
-    }
+    const getAppName = async (appId: string) => (await $`mas info ${appId}`.quiet()).text().trim().split("\n")[0] ?? ""
 
     const addedAppsPromises = diff.added.map(async (appId) => [await getAppName(appId), appId] as const)
     const removedAppsPromises = diff.removed.map(async (appId) => [await getAppName(appId), appId] as const)

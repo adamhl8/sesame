@@ -1,5 +1,6 @@
-import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
+
+import { PluginBuilder } from "@/core/plugin/builder.ts"
 
 const sdkman = PluginBuilder.new<null>({ name: "Install sdkman" })
   .diff<true>((_, previous) => (previous === null ? undefined : true))

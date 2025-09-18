@@ -34,7 +34,7 @@ function getHostData(config: ValidatedConfig, host: string) {
     arch: process.arch,
     os: process.platform,
   })
-  if (hostContext instanceof type.errors) return err(hostContext.summary)
+  if (hostContext instanceof type.errors) return err(hostContext.summary, undefined)
 
   const plugins = config[host]?.plugins ?? []
 
@@ -49,7 +49,7 @@ function getPluginContext(hostContext: HostContext, pluginLogger: ClackLogger) {
       raw: "",
     },
   })
-  if (pluginContext instanceof type.errors) return err(pluginContext.summary)
+  if (pluginContext instanceof type.errors) return err(pluginContext.summary, undefined)
 
   return pluginContext
 }
@@ -85,7 +85,6 @@ async function main(sesameConfig: SesameConfig, logger: ClackLogger): Promise<Re
       const pluginContext = getPluginContext(hostContext, pluginLogger)
       if (isErr(pluginContext)) return hostErr("failed to build plugin context", pluginContext)
 
-      // biome-ignore lint/performance/noAwaitInLoops: plugins should run in order
       const handlePluginResult = await handlePlugin(plugin, pluginContext)
       if (isErr(handlePluginResult)) return hostErr("failed to run plugin", handlePluginResult)
     }
@@ -96,5 +95,5 @@ async function main(sesameConfig: SesameConfig, logger: ClackLogger): Promise<Re
   logger.success("Done!")
 }
 
-export { hostContextSchema, main }
+export { main }
 export type { PluginContext }

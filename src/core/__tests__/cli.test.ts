@@ -1,14 +1,9 @@
 import { describe, expect, spyOn, test } from "bun:test"
 import process from "node:process"
-import type { CtxError, Result } from "ts-explicit-errors"
-import { isErr } from "ts-explicit-errors"
 
 import { getArgv, parseCliArgs } from "@/core/cli.ts"
 import type { SesameConfig } from "@/core/config/schema.ts"
-
-function expectErr<T>(result: Result<T>): asserts result is CtxError {
-  expect(isErr(result)).toBe(true)
-}
+import { expectErr } from "~/__tests__/utils.ts"
 
 function neverFn() {
   return void 0 as never
@@ -32,7 +27,7 @@ describe("cli", () => {
     const error = parseCliArgs(config)
     expectErr(error)
 
-    expect(error.fmtErr()).toStartWith("host 'invalid-host' not found in config")
+    expect(error.messageChain).toStartWith("host 'invalid-host' not found in config")
 
     process.argv = originalArgv
   })

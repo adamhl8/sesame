@@ -1,6 +1,7 @@
-import { getAddedRemovedDiff } from "@/plugins/lib/lib"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
+
+import { PluginBuilder } from "@/core/plugin/builder.ts"
+import { getAddedRemovedDiff } from "@/plugins/lib/lib"
 
 interface MacosDockDiff {
   added: string[]
@@ -8,7 +9,9 @@ interface MacosDockDiff {
 }
 
 const macosDock = PluginBuilder.new<string[]>({ name: "MacOS Dock" })
-  .transform(async (items) => items.map((item) => (item.startsWith("/Applications/") ? item : `/Applications/${item}.app`)))
+  .transform(async (items) =>
+    items.map((item) => (item.startsWith("/Applications/") ? item : `/Applications/${item}.app`)),
+  )
   .diff<MacosDockDiff>((_, previous, items) => getAddedRemovedDiff(items, previous ?? []))
   .handle(async (_, __, items) => {
     await $`dockutil --no-restart --remove all`.quiet()
