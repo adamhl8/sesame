@@ -1,56 +1,65 @@
 {
-  "name": "sesame-bun",
-  "version": "0.1.3",
-  "type": "module",
-  "description": "Declarative, extensible, agentless Infrastructure as Code in TypeScript/Bun",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/adamhl8/sesame"
-  },
-  "homepage": "https://github.com/adamhl8/sesame",
-  "bugs": {
-    "url": "https://github.com/adamhl8/sesame/issues"
-  },
-  "author": {
-    "email": "adamhl@pm.me",
-    "name": "Adam Langbert",
-    "url": "https://github.com/adamhl8"
-  },
-  "license": "MIT",
-  "exports": {
-    ".": "./dist/index.ts",
-    "./types": "./dist/types.ts",
-    "./plugin": "./dist/plugin.ts",
-    "./plugins": "./dist/plugins/index.ts",
-    "./lib": "./dist/lib.ts"
-  },
-  "files": ["dist/"],
-  "keywords": ["bun", "typescript", "infra", "infrastructure", "infrastructure as code", "iac"],
-  "scripts": {
-    "bundle": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts",
-    "lint": "markdown-toc -i --bullets '-' --maxdepth 3 ./README.md && tsc --noEmit && biome check --write && adamhl8-knip",
-    "prepare": "find .githooks -type f -exec ln -srf {} .git/hooks/ \\; || true"
-  },
-  "dependencies": {
-    "@clack/prompts": "^0.11.0",
-    "cli-highlight": "^2.1.11",
-    "consola": "^3.4.2",
-    "figures": "^6.1.0",
-    "lowdb": "^7.0.1",
-    "picocolors": "^1.1.1",
-    "signale": "^1.4.0",
-    "ts-explicit-errors": "^4.0.1",
-    "type-fest": "^5.0.0",
-    "untildify": "^6.0.0",
-    "valibot": "v1.0.0-beta.9"
-  },
-  "devDependencies": {
-    "@adamhl8/configs": "^0.15.15",
-    "@biomejs/biome": "^2.2.4",
-    "@types/bun": "^1.2.22",
-    "@types/signale": "^1.4.7",
-    "knip": "^5.63.1",
-    "markdown-toc": "^1.2.0",
-    "typescript": "^5.9.2"
-  }
+	"name": "sesame-bun",
+	"version": "0.1.3",
+	"type": "module",
+	"description": "Declarative, extensible, agentless Infrastructure as Code in TypeScript/Bun",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/adamhl8/sesame"
+	},
+	"homepage": "https://github.com/adamhl8/sesame",
+	"bugs": {
+		"url": "https://github.com/adamhl8/sesame/issues"
+	},
+	"author": {
+		"email": "adamhl@pm.me",
+		"name": "Adam Langbert",
+		"url": "https://github.com/adamhl8"
+	},
+	"license": "MIT",
+	"exports": {
+		".": "./dist/index.ts",
+		"./types": "./dist/types.ts",
+		"./plugin": "./dist/plugin.ts",
+		"./plugins": "./dist/plugins/index.ts",
+		"./lib": "./dist/lib.ts"
+	},
+	"files": [
+		"dist/"
+	],
+	"keywords": [
+		"bun",
+		"typescript",
+		"infra",
+		"infrastructure",
+		"infrastructure as code",
+		"iac"
+	],
+	"scripts": {
+		"bundle": "bun scripts/generate-plugin-index.ts && bun lint && bun scripts/build.ts",
+		"lint": "markdown-toc -i --bullets '-' --maxdepth 3 ./README.md && tsc --noEmit && biome check --write && adamhl8-knip",
+		"prepare": "find .githooks -type f -exec ln -srf {} .git/hooks/ \\; || true"
+	},
+	"dependencies": {
+		"@clack/prompts": "^0.11.0",
+		"cli-highlight": "^2.1.11",
+		"consola": "^3.4.2",
+		"figures": "^6.1.0",
+		"lowdb": "^7.0.1",
+		"picocolors": "^1.1.1",
+		"signale": "^1.4.0",
+		"ts-explicit-errors": "^4.0.1",
+		"type-fest": "^5.0.0",
+		"untildify": "^6.0.0",
+		"valibot": "v1.0.0-beta.9"
+	},
+	"devDependencies": {
+		"@adamhl8/configs": "^0.15.19",
+		"@biomejs/biome": "^2.2.4",
+		"@types/bun": "^1.2.22",
+		"@types/signale": "^1.4.7",
+		"knip": "^5.63.1",
+		"markdown-toc": "^1.2.0",
+		"typescript": "^5.9.2"
+	}
 }
