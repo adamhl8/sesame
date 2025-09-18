@@ -1,8 +1,10 @@
+/** biome-ignore-all lint/performance/noAwaitInLoops: ignore */
+import fs from "node:fs/promises"
+import * as path from "node:path"
+import { $ } from "bun"
+
 import { resolvePath } from "@/core/lib/path.ts"
 import { PluginBuilder } from "@/core/plugin/builder.ts"
-import { $ } from "bun"
-import * as fs from "node:fs/promises"
-import * as path from "node:path"
 
 interface Link {
   source: string
@@ -14,7 +16,7 @@ interface LinkFilesChange {
   removed: Link[]
 }
 
-const linkFiles = PluginBuilder.new({ name: "Link Files" })
+const linkFiles = PluginBuilder.new<Link[]>({ name: "Link Files" })
   .transform(async (links) => await _expandAndResolveLinks(links))
   .diff<LinkFilesChange>(async (_, previous, links) => {
     const current: Link[] = []

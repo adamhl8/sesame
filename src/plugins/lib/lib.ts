@@ -1,6 +1,8 @@
+import process from "node:process"
+import { $ } from "bun"
+
 import { resolvePath } from "@/core/lib/path"
 import type { ClackLogger } from "@/core/logger"
-import { $ } from "bun"
 
 async function getSopsSecret(pathString: string) {
   const keys = pathString.split(".").join("']['")
@@ -31,7 +33,7 @@ async function sudo(host: string) {
   return { raw: `echo ${sudoPassword} | sudo -S -p '' --` }
 }
 
-async function installAppFromZip(downloadUrl: string) {
+export async function installAppFromZip(downloadUrl: string) {
   const zipPath = await resolvePath("~/tmp_hl_download.zip")
   await $`curl -Lo ${zipPath} ${downloadUrl}`.quiet()
   await $`unzip -o -q ${zipPath} -d /Applications/`.quiet()
@@ -42,4 +44,4 @@ function runFishCmd(cmd: string) {
   return $`fish -l -c ${cmd}`
 }
 
-export { getAddedRemovedDiff, requestRestart, getSopsSecret, sudo }
+export { getAddedRemovedDiff, requestRestart, getSopsSecret, sudo, runFishCmd }

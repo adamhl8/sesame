@@ -14,17 +14,17 @@ async function resolveEnvVars(path: string) {
 }
 
 async function resolvePath(path: string) {
-  path = path.trim()
+  let newPath = path.trim()
 
   // We want to keep trailing slashes that nodePath.resolve() will remove
-  const hasTrailingSlash = path.endsWith("/")
+  const hasTrailingSlash = newPath.endsWith("/")
 
-  path = untildify(path)
-  path = await resolveEnvVars(path)
-  path = nodePath.resolve(path)
-  path = path !== "/" && hasTrailingSlash ? `${path}/` : path
+  newPath = untildify(newPath)
+  newPath = await resolveEnvVars(newPath)
+  newPath = nodePath.resolve(newPath)
+  newPath = newPath !== "/" && hasTrailingSlash ? `${newPath}/` : newPath
 
-  return path
+  return newPath
 }
 
 export { resolvePath }

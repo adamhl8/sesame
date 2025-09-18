@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { resolvePath } from "@/core/lib/path"
+
 import { _createLink, _expandAndResolveLinks } from "@/plugins/misc/link-files.ts"
 
 const LINK_FILES_TEST = `${import.meta.dir}/link-files-test`
@@ -61,6 +61,7 @@ describe("link-files", () => {
       ]
       const expandedLinks = await _expandAndResolveLinks(links)
       console.log("expandedLinks", expandedLinks)
+      // biome-ignore lint/style/noNonNullAssertion: ignore
       await _createLink(expandedLinks[0]!)
     })
   })

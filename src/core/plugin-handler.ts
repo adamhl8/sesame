@@ -1,10 +1,11 @@
-import { db } from "@/core/state-db.ts"
-import { stringify } from "@/core/lib/utils.ts"
-import { attempt, err, isErr, errWithCtx, type Result } from "ts-explicit-errors"
+import type { Result } from "ts-explicit-errors"
+import { attempt, err, errWithCtx, isErr } from "ts-explicit-errors"
+import type { JsonValue } from "type-fest"
 
 import type { PluginInstance } from "@/core/config/schema.ts"
-import type { JsonValue } from "type-fest"
+import { stringify } from "@/core/lib/utils.ts"
 import type { PluginContext } from "@/core/main.ts"
+import { db } from "@/core/state-db.ts"
 
 // TODO: replace with arktype json when it's released
 function isValidJsonValue(value: unknown): value is JsonValue {
@@ -34,7 +35,6 @@ async function getInput(plugin: PluginInstance): Promise<Result<JsonValue>> {
   )
   if (isErr(input)) return input
   // if input is nullish, we set it to null because null is a valid JSON value
-  // eslint-disable-next-line unicorn/no-null
   input ??= null
   if (!isValidJsonValue(input)) return err("input is not valid JSON")
 
@@ -95,7 +95,7 @@ async function handlePlugin(plugin: PluginInstance, context: PluginContext): Pro
     return
   }
 
-  if (!plugin.handle) return pluginErr("handle function is undefined")
+  if (!plugin.handle) return pluginErr("handle function is undefined", undefined)
   await plugin.handle(context, diff, input)
 
   db.set(host, plugin.details.name, input)

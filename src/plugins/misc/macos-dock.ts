@@ -1,5 +1,5 @@
 import { getAddedRemovedDiff } from "@/plugins/lib/lib"
-import { createPlugin } from "@/plugin.ts"
+import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
 
 interface MacosDockDiff {
@@ -7,20 +7,17 @@ interface MacosDockDiff {
   removed: string[]
 }
 
-const macosDock = createPlugin<string[], MacosDockDiff>(
-  { name: "MacOS Dock" },
-  {
-    diff: (_, previous, items) => getAddedRemovedDiff(items, previous ?? []),
-    handle: async (_, __, items) => {
-      await $`dockutil --no-restart --remove all`.quiet()
-      for (const [index, item] of items.entries()) {
-        const isLast = index === items.length - 1
-        const shouldRestart = { raw: isLast ? "" : "--no-restart" }
-        await $`dockutil ${shouldRestart} --add ${item}`.quiet()
-      }
-    },
-  },
-  (items) => items.map((item) => (item.startsWith("/Applications/") ? item : `/Applications/${item}.app`)),
-)
+const macosDock = PluginBuilder.new<string[]>({ name: "MacOS Dock" })
+  .transform(async (items) => items.map((item) => (item.startsWith("/Applications/") ? item : `/Applications/${item}.app`)))
+  .diff<MacosDockDiff>((_, previous, items) => getAddedRemovedDiff(items, previous ?? []))
+  .handle(async (_, __, items) => {
+    await $`dockutil --no-restart --remove all`.quiet()
+    for (const [index, item] of items.entries()) {
+      const isLast = index === items.length - 1
+      const shouldRestart = { raw: isLast ? "" : "--no-restart" }
+      await $`dockutil ${shouldRestart} --add ${item}`.quiet()
+    }
+  })
+  .build()
 
 export { macosDock }

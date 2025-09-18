@@ -1,12 +1,13 @@
 import { afterAll, beforeAll, describe, expect, jest, mock, spyOn, test } from "bun:test"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
-import { expectErr, expectNotErr } from "@/__tests__/utils.ts"
-import { getDiff, getInput } from "@/core/plugin-handler.ts"
-import type { JsonValue } from "type-fest"
 import { expectTypeOf } from "expect-type"
-import type { PluginContext } from "@/core/main.ts"
-import { db } from "@/core/state-db.ts"
+import type { JsonValue } from "type-fest"
+
+import { expectErr, expectNotErr } from "@/__tests__/utils.ts"
 import type { PluginInstance } from "@/core/config/schema.ts"
+import type { PluginContext } from "@/core/main.ts"
+import { PluginBuilder } from "@/core/plugin/builder.ts"
+import { getDiff, getInput } from "@/core/plugin-handler.ts"
+import { db } from "@/core/state-db.ts"
 
 describe("plugin-handler", () => {
   describe("getInput", () => {
@@ -29,7 +30,6 @@ describe("plugin-handler", () => {
           throw new Error("transform error")
         })
         .build()
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       const pluginInstance = plugin() as unknown as PluginInstance
 
       const input = await getInput(pluginInstance)
@@ -84,7 +84,6 @@ describe("plugin-handler", () => {
       const plugin = PluginBuilder.new({ name: "pluginName" }).build()
       const pluginInstance = plugin()
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       const diff = await getDiff(pluginInstance, { hostCtx: { host: "foo" } } as PluginContext, {})
 
       expectErr(diff)
@@ -98,10 +97,8 @@ describe("plugin-handler", () => {
           throw new Error("diff error")
         })
         .build()
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       const pluginInstance = plugin() as unknown as PluginInstance
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       const diff = await getDiff(pluginInstance, { hostCtx: { host: "foo" } } as PluginContext, {})
       expectErr(diff)
 
@@ -114,7 +111,6 @@ describe("plugin-handler", () => {
         .build()
       const pluginInstance = plugin()
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       const diff = await getDiff(pluginInstance, { hostCtx: { host: "foo" } } as PluginContext, {})
       expectNotErr(diff)
 

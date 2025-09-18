@@ -42,6 +42,7 @@
 	},
 	"dependencies": {
 		"@clack/prompts": "^0.11.0",
+		"arktype": "^2.1.22",
 		"cli-highlight": "^2.1.11",
 		"consola": "^3.4.2",
 		"figures": "^6.1.0",

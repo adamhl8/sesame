@@ -1,4 +1,5 @@
 import { type } from "arktype"
+
 import type { PluginContext } from "@/core/main.ts"
 
 type AsyncOrSync<T> = Promise<T> | T
@@ -31,7 +32,6 @@ type PluginUpdate = (ctx: PluginContext) => AsyncOrSync<void>
   So when passing in a PluginInstance (which, for example, might be typed as <string, string, string>) to the plugins array,
   TypeScript correctly complains that <string, string, string> is not assignable to <unknown, unknown, unknown>.
 */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface PluginInstance<Input = any, TInput = Input, Diff = any> {
   details: PluginDetails
   input: PluginInput<Input>

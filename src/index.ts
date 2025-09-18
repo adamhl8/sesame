@@ -1,10 +1,12 @@
 #!/usr/bin/env bun
+import process from "node:process"
+import type { Result } from "ts-explicit-errors"
+
+import { bootstrap } from "@/core/bootstrap.ts"
+import type { SesameConfig } from "@/core/config/schema.ts"
 // import { sudo } from "@/lib.ts"
 import { ClackLogger } from "@/core/logger.ts"
-import { bootstrap } from "@/core/bootstrap.ts"
 import { main } from "@/core/main.ts"
-import type { SesameConfig } from "@/core/config/schema.ts"
-import type { Result } from "ts-explicit-errors"
 
 /**
  * sesame
@@ -16,10 +18,10 @@ async function sesame(config: SesameConfig): Promise<Result> {
 
   if (process.env["SESAME_BOOTSTRAPPED"] === "TRUE") {
     const error = await main(config, logger)
-    if (error) logger.error(error.fmtErr())
+    if (error) logger.error(error.messageChain)
   } else {
     const error = await bootstrap()
-    if (error) logger.error(error.fmtErr("failed to bootstrap sesame"))
+    if (error) logger.error(`failed to bootstrap sesame: ${error.messageChain}`)
   }
 }
 

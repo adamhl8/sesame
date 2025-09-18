@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/style/useReadonlyClassProperties: false-positive */
+/** biome-ignore-all lint/correctness/noUnusedPrivateClassMembers: false-positive */
 import type {
   PluginDetails,
   PluginDiff,
@@ -22,9 +24,9 @@ type Plugin<Input, TInput, Diff> = undefined extends Input // if Input is undefi
   ? (input?: Input) => PluginInstance<Input, TInput, Diff> // then input is optional
   : (input: Input) => PluginInstance<Input, TInput, Diff> // else, input is required
 
-class PluginBuilder<Input = undefined, TInput = Input, Diff = unknown> {
+class PluginBuilder<IInput = undefined, TInput = IInput, Diff = unknown> {
   private readonly details: PluginDetails
-  private transformFn?: PluginTransform<Input, TInput>
+  private transformFn?: PluginTransform<IInput, TInput>
   private diffFn?: PluginDiff<TInput, Diff>
   private handleFn?: PluginHandle<Diff, TInput>
   private updateFn?: PluginUpdate
@@ -42,15 +44,15 @@ class PluginBuilder<Input = undefined, TInput = Input, Diff = unknown> {
     return new PluginBuilder<Input>(details)
   }
 
-  public transform<NewTInput>(fn: PluginTransform<Input, NewTInput>) {
-    const builder = new PluginBuilder<Input, NewTInput, Diff>(this.details)
+  public transform<NewTInput>(fn: PluginTransform<IInput, NewTInput>) {
+    const builder = new PluginBuilder<IInput, NewTInput, Diff>(this.details)
     builder.transformFn = fn
     return builder
   }
 
   public diff<NewDiff>(fn: PluginDiff<TInput, NewDiff>) {
     // Create a new builder with the same input type but new diff type
-    const builder = new PluginBuilder<Input, TInput, NewDiff>(this.details)
+    const builder = new PluginBuilder<IInput, TInput, NewDiff>(this.details)
     if (this.transformFn) builder.transformFn = this.transformFn
     builder.diffFn = fn
     return builder
@@ -65,10 +67,10 @@ class PluginBuilder<Input = undefined, TInput = Input, Diff = unknown> {
     return this
   }
 
-  public build(): Plugin<Input, TInput, Diff> {
+  public build(): Plugin<IInput, TInput, Diff> {
     const { details, transformFn, diffFn, handleFn, updateFn } = this
 
-    const plugin = (input: Input) => ({
+    const plugin = (input: IInput) => ({
       details,
       input: () => input,
       transform: transformFn,
@@ -77,8 +79,7 @@ class PluginBuilder<Input = undefined, TInput = Input, Diff = unknown> {
       update: updateFn,
     })
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    return plugin as Plugin<Input, TInput, Diff>
+    return plugin as Plugin<IInput, TInput, Diff>
   }
 }
 

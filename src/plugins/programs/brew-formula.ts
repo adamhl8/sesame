@@ -1,5 +1,5 @@
 import { getAddedRemovedDiff } from "@/plugins/lib/lib"
-import { createPlugin } from "@/plugin.ts"
+import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
 
 interface BrewFormulaDiff {
@@ -7,25 +7,22 @@ interface BrewFormulaDiff {
   removed: string[]
 }
 
-const brewFormula = createPlugin<string[], BrewFormulaDiff>(
-  { name: "Brew Formula" },
-  {
-    diff: async (_, _previous, formula) => {
-      const current = (await $`brew ls --installed-on-request --formula -1`.quiet()).text().trim().split("\n")
-      return getAddedRemovedDiff(formula, current)
-    },
-    handle: async (_, diff) => {
-      if (diff.removed.length > 0) {
-        for (const formula of diff.removed) await $`brew uninstall --formula ${formula}`
-      }
-      if (diff.added.length > 0) {
-        for (const formula of diff.added) await $`brew install --formula ${formula}`
-      }
-    },
-    update: async () => {
-      await $`brew update`
-    },
-  },
-)
+const brewFormula = PluginBuilder.new<string[]>({ name: "Brew Formula" })
+  .diff<BrewFormulaDiff>(async (_, _previous, formula) => {
+    const current = (await $`brew ls --installed-on-request --formula -1`.quiet()).text().trim().split("\n")
+    return getAddedRemovedDiff(formula, current)
+  })
+  .handle(async (_, diff) => {
+    if (diff.removed.length > 0) {
+      for (const formula of diff.removed) await $`brew uninstall --formula ${formula}`
+    }
+    if (diff.added.length > 0) {
+      for (const formula of diff.added) await $`brew install --formula ${formula}`
+    }
+  })
+  .update(async () => {
+    await $`brew update`
+  })
+  .build()
 
 export { brewFormula }

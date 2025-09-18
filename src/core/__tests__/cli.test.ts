@@ -1,5 +1,8 @@
 import { describe, expect, spyOn, test } from "bun:test"
-import { isErr, type CtxError, type Result } from "ts-explicit-errors"
+import process from "node:process"
+import type { CtxError, Result } from "ts-explicit-errors"
+import { isErr } from "ts-explicit-errors"
+
 import { getArgv, parseCliArgs } from "@/core/cli.ts"
 import type { SesameConfig } from "@/core/config/schema.ts"
 
@@ -8,7 +11,6 @@ function expectErr<T>(result: Result<T>): asserts result is CtxError {
 }
 
 function neverFn() {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   return void 0 as never
 }
 
@@ -26,7 +28,6 @@ describe("cli", () => {
   test("returns expected error when host is not found in config", () => {
     const originalArgv = [...process.argv]
     process.argv = ["arg1", "arg2", "invalid-host"]
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     const config = { "my-host": {} } as unknown as SesameConfig
     const error = parseCliArgs(config)
     expectErr(error)

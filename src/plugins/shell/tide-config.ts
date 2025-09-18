@@ -1,15 +1,12 @@
-import { createPlugin } from "@/plugin.ts"
-import { runFishCmd } from "@/core/lib/utils"
+import { PluginBuilder } from "@/core/plugin/builder.ts"
+import { runFishCmd } from "~/plugins/lib/lib.ts"
 
-const tideConfig = createPlugin<string, true>(
-  { name: "Tide Config", printDiff: false },
-  {
-    diff: (_, previous, configString) => (previous !== configString ? true : undefined),
-    handle: async (_, __, input) => {
-      console.info("Configuring tide...")
-      await runFishCmd(`echo ${input} y | tide configure`).quiet()
-    },
-  },
-)
+const tideConfig = PluginBuilder.new<string>({ name: "Tide Config", printDiff: false })
+  .diff<true>((_, previous, configString) => (previous !== configString ? true : undefined))
+  .handle(async (_, __, input) => {
+    console.info("Configuring tide...")
+    await runFishCmd(`echo ${input} y | tide configure`).quiet()
+  })
+  .build()
 
 export { tideConfig }

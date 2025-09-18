@@ -1,18 +1,15 @@
-import { createPlugin } from "@/plugin.ts"
+import { PluginBuilder } from "@/core/plugin/builder.ts"
 import { $ } from "bun"
 
-const fnm = createPlugin<null, true>(
-  { name: "fnm" },
-  {
-    diff: (_, previous) => (previous === null ? undefined : true),
-    handle: async () => {
-      await $`fnm install --latest`
-      await $`npm install -g npm`
-    },
-    update: () => {
-      return
-    },
-  },
-)
+const fnm = PluginBuilder.new<null>({ name: "fnm" })
+  .diff<true>((_, previous) => (previous === null ? undefined : true))
+  .handle(async () => {
+    await $`fnm install --latest`
+    await $`npm install -g npm`
+  })
+  .update(() => {
+    return
+  })
+  .build()
 
 export { fnm }

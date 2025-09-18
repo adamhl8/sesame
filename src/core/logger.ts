@@ -1,8 +1,8 @@
-import { intro, log as clackLog, outro } from "@clack/prompts"
-import pc from "picocolors"
+import { log as clackLog, confirm, intro, isCancel, outro } from "@clack/prompts"
 import figures from "figures"
-import { confirm, isCancel } from "@clack/prompts"
-import { err, type Result } from "ts-explicit-errors"
+import pc from "picocolors"
+import type { Result } from "ts-explicit-errors"
+import { err } from "ts-explicit-errors"
 
 type Figure = keyof typeof figures
 
@@ -150,7 +150,6 @@ class ClackLogger {
     })
   }
 
-  // eslint-disable-next-line @typescript-eslint/class-methods-use-this
   public async continue(message: string): Promise<Result<boolean>> {
     const shouldContinue = await confirm({ message })
 

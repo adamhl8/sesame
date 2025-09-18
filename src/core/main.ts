@@ -1,10 +1,13 @@
-import { validateConfig, type ValidatedConfig } from "@/core/config/validator.ts"
-import { parseCliArgs } from "@/core/cli.ts"
+import process from "node:process"
 import { type } from "arktype"
-import { err, isErr, errWithCtx, type Result } from "ts-explicit-errors"
+import type { Result } from "ts-explicit-errors"
+import { err, errWithCtx, isErr } from "ts-explicit-errors"
 
-import { ClackLogger } from "@/core/logger.ts"
+import { parseCliArgs } from "@/core/cli.ts"
 import type { SesameConfig } from "@/core/config/schema.ts"
+import type { ValidatedConfig } from "@/core/config/validator.ts"
+import { validateConfig } from "@/core/config/validator.ts"
+import { ClackLogger } from "@/core/logger.ts"
 import { handlePlugin } from "@/core/plugin-handler.ts"
 
 const hostContextSchema = type({
@@ -82,8 +85,7 @@ async function main(sesameConfig: SesameConfig, logger: ClackLogger): Promise<Re
       const pluginContext = getPluginContext(hostContext, pluginLogger)
       if (isErr(pluginContext)) return hostErr("failed to build plugin context", pluginContext)
 
-      // plugins should run in order
-      // eslint-disable-next-line no-await-in-loop
+      // biome-ignore lint/performance/noAwaitInLoops: plugins should run in order
       const handlePluginResult = await handlePlugin(plugin, pluginContext)
       if (isErr(handlePluginResult)) return hostErr("failed to run plugin", handlePluginResult)
     }

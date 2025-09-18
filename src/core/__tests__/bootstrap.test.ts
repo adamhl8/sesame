@@ -1,7 +1,8 @@
 import { afterEach, describe, expect, test } from "bun:test"
-import { bootstrap } from "@/core/bootstrap.ts"
 import * as fs from "node:fs/promises"
+
 import { expectErr } from "@/__tests__/utils.ts"
+import { bootstrap } from "@/core/bootstrap.ts"
 
 const BOOTSTRAP_TEST_DIR = import.meta.dir
 
@@ -28,7 +29,6 @@ describe("bootstrap", () => {
 
     await bootstrap()
     const sesameTsBunEnvJson = await Bun.file(`${BOOTSTRAP_TEST_DIR}/sesame.txt`).text()
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     const sesameTsBunEnv = JSON.parse(sesameTsBunEnvJson) as typeof Bun.env
 
     expect(sesameTsBunEnv["SESAME_BOOTSTRAPPED"]).toBe("TRUE")

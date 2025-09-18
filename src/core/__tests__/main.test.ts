@@ -1,12 +1,15 @@
-import { afterEach, beforeEach, describe, expect, jest, spyOn, test, type Mock } from "bun:test"
-import { bootstrap } from "@/core/bootstrap.ts"
-import { err, isErr, type CtxError, type Result } from "ts-explicit-errors"
+import type { Mock } from "bun:test"
+import { afterEach, beforeEach, describe, expect, jest, spyOn, test } from "bun:test"
 import fs from "node:fs/promises"
-import { main } from "@/core/main.ts"
-import { ClackLogger } from "@/core/logger.ts"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
+import type { CtxError, Result } from "ts-explicit-errors"
+import { err, isErr } from "ts-explicit-errors"
+
+import { bootstrap } from "@/core/bootstrap.ts"
 import * as cli from "@/core/cli.ts"
 import * as validator from "@/core/config/validator.ts"
+import { ClackLogger } from "@/core/logger.ts"
+import { main } from "@/core/main.ts"
+import { PluginBuilder } from "@/core/plugin/builder.ts"
 
 function createMockLogger() {
   return {
@@ -40,7 +43,6 @@ describe("main", () => {
   })
 
   test("returns expected error when CLI args are invalid", async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     spyOn(validator, "validateConfig").mockImplementation(() => void 0 as never)
     spyOn(cli, "parseCliArgs").mockImplementation(() => err("parseCliArgs error"))
 
@@ -51,7 +53,6 @@ describe("main", () => {
   })
 
   test("logs intro message", async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     spyOn(validator, "validateConfig").mockImplementation(() => void 0 as never)
     spyOn(cli, "parseCliArgs").mockImplementation(() => ({ hosts: ["host1", "host2"] }))
 
