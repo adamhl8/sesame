@@ -4,8 +4,8 @@ import type { Result } from "ts-explicit-errors"
 import { err } from "ts-explicit-errors"
 import type { Tagged } from "type-fest"
 
-import type { SesameConfig } from "@/core/config/schema.ts"
-import { sesameConfigSchema } from "@/core/config/schema.ts"
+import type { SesameConfig } from "~/core/config/schema.ts"
+import { sesameConfigSchema } from "~/core/config/schema.ts"
 
 function isArkErrors(value: unknown): value is ArkErrors {
   return value instanceof type.errors

@@ -2,10 +2,10 @@
 import process from "node:process"
 import type { Result } from "ts-explicit-errors"
 
-import { bootstrap } from "@/core/bootstrap.ts"
-import type { SesameConfig } from "@/core/config/schema.ts"
-import { ClackLogger } from "@/core/logger.ts"
-import { main } from "@/core/main.ts"
+import { bootstrap } from "~/core/bootstrap.ts"
+import type { SesameConfig } from "~/core/config/schema.ts"
+import { ClackLogger } from "~/core/logger.ts"
+import { main } from "~/core/main.ts"
 
 /**
  * sesame

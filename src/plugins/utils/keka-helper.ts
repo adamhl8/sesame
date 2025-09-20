@@ -1,7 +1,7 @@
 import { $ } from "bun"
 
-import { PluginBuilder } from "@/core/plugin/builder.ts"
 import type { PluginContext } from "~/core/main.ts"
+import { PluginBuilder } from "~/core/plugin/builder.ts"
 import { installAppFromZip } from "~/plugins/lib/lib.ts"
 
 async function useKekaHelper(ctx: PluginContext) {

@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, test } from "bun:test"
 import * as fs from "node:fs/promises"
 
-import { expectErr } from "@/__tests__/utils.ts"
-import { bootstrap } from "@/core/bootstrap.ts"
+import { expectErr } from "~/__tests__/utils.ts"
+import { bootstrap } from "~/core/bootstrap.ts"
 
 const BOOTSTRAP_TEST_DIR = import.meta.dir
 

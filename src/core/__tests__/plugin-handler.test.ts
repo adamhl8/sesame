@@ -2,12 +2,12 @@ import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from "bun:te
 import { expectTypeOf } from "expect-type"
 import type { JsonValue } from "type-fest"
 
-import { expectErr, expectNotErr } from "@/__tests__/utils.ts"
-import type { PluginInstance } from "@/core/config/schema.ts"
-import type { PluginContext } from "@/core/main.ts"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
-import { getDiff, getInput } from "@/core/plugin-handler.ts"
-import { db } from "@/core/state-db.ts"
+import { expectErr, expectNotErr } from "~/__tests__/utils.ts"
+import type { PluginInstance } from "~/core/config/schema.ts"
+import type { PluginContext } from "~/core/main.ts"
+import { PluginBuilder } from "~/core/plugin/builder.ts"
+import { getDiff, getInput } from "~/core/plugin-handler.ts"
+import { db } from "~/core/state-db.ts"
 
 describe("plugin-handler", () => {
   describe("getInput", () => {

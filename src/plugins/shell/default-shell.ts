@@ -1,7 +1,7 @@
 import { $ } from "bun"
 
-import { resolvePath } from "@/core/lib/path"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
+import { resolvePath } from "~/core/lib/path"
+import { PluginBuilder } from "~/core/plugin/builder.ts"
 
 interface DefaultShellDiff {
   addShell?: boolean

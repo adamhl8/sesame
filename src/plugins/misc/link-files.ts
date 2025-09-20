@@ -3,8 +3,8 @@ import fs from "node:fs/promises"
 import * as path from "node:path"
 import { $ } from "bun"
 
-import { resolvePath } from "@/core/lib/path.ts"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
+import { resolvePath } from "~/core/lib/path.ts"
+import { PluginBuilder } from "~/core/plugin/builder.ts"
 
 interface Link {
   source: string

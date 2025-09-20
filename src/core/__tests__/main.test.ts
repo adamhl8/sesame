@@ -1,11 +1,11 @@
 import { describe, expect, spyOn, test } from "bun:test"
 import { err } from "ts-explicit-errors"
 
-import * as cli from "@/core/cli.ts"
-import * as validator from "@/core/config/validator.ts"
-import { ClackLogger } from "@/core/logger.ts"
-import { main } from "@/core/main.ts"
 import { expectErr } from "~/__tests__/utils"
+import * as cli from "~/core/cli.ts"
+import * as validator from "~/core/config/validator.ts"
+import { ClackLogger } from "~/core/logger.ts"
+import { main } from "~/core/main.ts"
 
 const logger = new ClackLogger()
 

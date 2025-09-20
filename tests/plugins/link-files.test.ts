@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
 
-import { _createLink, _expandAndResolveLinks } from "@/plugins/misc/link-files.ts"
+import { _createLink, _expandAndResolveLinks } from "~/plugins/misc/link-files.ts"
 
 const LINK_FILES_TEST = `${import.meta.dir}/link-files-test`
 

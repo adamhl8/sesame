@@ -1,9 +1,9 @@
 import { describe, expect, test } from "bun:test"
 
-import { expectErr } from "@/__tests__/utils.ts"
-import type { SesameConfig } from "@/core/config/schema.ts"
-import { validateConfig } from "@/core/config/validator"
-import { PluginBuilder } from "@/core/plugin/builder.ts"
+import { expectErr } from "~/__tests__/utils.ts"
+import type { SesameConfig } from "~/core/config/schema.ts"
+import { validateConfig } from "~/core/config/validator"
+import { PluginBuilder } from "~/core/plugin/builder.ts"
 
 describe("validateConfig", () => {
   describe("when config is invalid", () => {

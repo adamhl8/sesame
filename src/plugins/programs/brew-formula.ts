@@ -1,7 +1,7 @@
 import { $ } from "bun"
 
-import { PluginBuilder } from "@/core/plugin/builder.ts"
-import { getAddedRemovedDiff } from "@/plugins/lib/lib"
+import { PluginBuilder } from "~/core/plugin/builder.ts"
+import { getAddedRemovedDiff } from "~/plugins/lib/lib"
 
 interface BrewFormulaDiff {
   added: string[]

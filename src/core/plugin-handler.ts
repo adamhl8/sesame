@@ -2,10 +2,10 @@ import type { Result } from "ts-explicit-errors"
 import { attempt, err, errWithCtx, isErr } from "ts-explicit-errors"
 import type { JsonValue } from "type-fest"
 
-import type { PluginInstance } from "@/core/config/schema.ts"
-import { stringify } from "@/core/lib/utils.ts"
-import type { PluginContext } from "@/core/main.ts"
-import { db } from "@/core/state-db.ts"
+import type { PluginInstance } from "~/core/config/schema.ts"
+import { stringify } from "~/core/lib/utils.ts"
+import type { PluginContext } from "~/core/main.ts"
+import { db } from "~/core/state-db.ts"
 
 // TODO: replace with arktype json when it's released
 function isValidJsonValue(value: unknown): value is JsonValue {

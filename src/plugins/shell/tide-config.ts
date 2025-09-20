@@ -1,4 +1,4 @@
-import { PluginBuilder } from "@/core/plugin/builder.ts"
+import { PluginBuilder } from "~/core/plugin/builder.ts"
 import { runFishCmd } from "~/plugins/lib/lib.ts"
 
 const tideConfig = PluginBuilder.new<string>({ name: "Tide Config", printDiff: false })

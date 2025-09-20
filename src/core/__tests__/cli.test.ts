@@ -1,9 +1,9 @@
 import { describe, expect, spyOn, test } from "bun:test"
 import process from "node:process"
 
-import { getArgv, parseCliArgs } from "@/core/cli.ts"
-import type { SesameConfig } from "@/core/config/schema.ts"
 import { expectErr } from "~/__tests__/utils.ts"
+import { getArgv, parseCliArgs } from "~/core/cli.ts"
+import type { SesameConfig } from "~/core/config/schema.ts"
 
 function neverFn() {
   return void 0 as never

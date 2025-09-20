@@ -7,7 +7,7 @@ import type {
   PluginInstance,
   PluginTransform,
   PluginUpdate,
-} from "@/core/config/schema.ts"
+} from "~/core/config/schema.ts"
 
 /*
   PluginBuilder returns a Plugin (via the build() method). This is used for authoring plugins.

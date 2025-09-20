@@ -2,7 +2,7 @@ import { cli } from "cleye"
 import type { Result } from "ts-explicit-errors"
 import { err } from "ts-explicit-errors"
 
-import type { SesameConfig } from "@/core/config/schema.ts"
+import type { SesameConfig } from "~/core/config/schema.ts"
 
 interface CliArgs {
   hosts: string[]

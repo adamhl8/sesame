@@ -3,12 +3,12 @@ import { type } from "arktype"
 import type { Result } from "ts-explicit-errors"
 import { err, errWithCtx, isErr } from "ts-explicit-errors"
 
-import { parseCliArgs } from "@/core/cli.ts"
-import type { SesameConfig } from "@/core/config/schema.ts"
-import type { ValidatedConfig } from "@/core/config/validator.ts"
-import { validateConfig } from "@/core/config/validator.ts"
-import { ClackLogger } from "@/core/logger.ts"
-import { handlePlugin } from "@/core/plugin-handler.ts"
+import { parseCliArgs } from "~/core/cli.ts"
+import type { SesameConfig } from "~/core/config/schema.ts"
+import type { ValidatedConfig } from "~/core/config/validator.ts"
+import { validateConfig } from "~/core/config/validator.ts"
+import { ClackLogger } from "~/core/logger.ts"
+import { handlePlugin } from "~/core/plugin-handler.ts"
 
 const hostContextSchema = type({
   host: "string",

@@ -1,6 +1,6 @@
 import { type } from "arktype"
 
-import type { PluginContext } from "@/core/main.ts"
+import type { PluginContext } from "~/core/main.ts"
 
 type AsyncOrSync<T> = Promise<T> | T
 

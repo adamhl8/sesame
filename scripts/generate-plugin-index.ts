@@ -38,7 +38,7 @@ async function generatePluginIndex(): Promise<Result> {
     const camelPluginFileName = kebabToCamel(pluginFileName)
     if (isErr(camelPluginFileName)) return err("failed to convert plugin name to camel case", camelPluginFileName)
 
-    exports.push(`export { ${camelPluginFileName} } from "./${pluginFilePath}"`)
+    exports.push(`export { ${camelPluginFileName} } from "~/plugins/${pluginFilePath}"`)
   }
 
   const writeResult = await attempt(() => Bun.write(PLUGIN_INDEX_FILE, `${exports.join("\n")}\n`))
