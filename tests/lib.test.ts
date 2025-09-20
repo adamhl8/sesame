@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import * as os from "node:os"
+import os from "node:os"
 import process from "node:process"
 
 import { resolvePath } from "~/core/lib/path.ts"

@@ -1,5 +1,5 @@
-import * as os from "node:os"
-import * as nodePath from "node:path"
+import os from "node:os"
+import nodePath from "node:path"
 import { $ } from "bun"
 
 const TILDE_REGEX = /^~(?=$|\/|\\)/

@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/performance/noAwaitInLoops: ignore */
 import fs from "node:fs/promises"
-import * as path from "node:path"
+import path from "node:path"
 import { $ } from "bun"
 
 import { resolvePath } from "~/core/lib/path.ts"
