@@ -1,8 +1,8 @@
 import process from "node:process"
 import { $ } from "bun"
 
-import { resolvePath } from "~/core/lib/path"
-import type { ClackLogger } from "~/core/logger"
+import { resolvePath } from "~/core/lib/path.ts"
+import type { ClackLogger } from "~/core/logger.ts"
 
 async function getSopsSecret(pathString: string) {
   const keys = pathString.split(".").join("']['")
