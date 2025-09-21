@@ -1,7 +1,7 @@
 import { $ } from "bun"
 
 import { PluginBuilder } from "~/core/plugin/builder.ts"
-import { requestRestart } from "~/plugins/lib/lib"
+import { requestRestart } from "~/plugins/lib/lib.ts"
 
 const installHomebrew = PluginBuilder.new<null>({ name: "Homebrew" })
   .diff<true>(() => (Bun.which("brew") ? undefined : true))

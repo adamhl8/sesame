@@ -1,8 +1,7 @@
 /** biome-ignore-all lint/performance/noAwaitInLoops: ignore */
 
 import { PluginBuilder } from "~/core/plugin/builder.ts"
-import { getAddedRemovedDiff } from "~/plugins/lib/lib"
-import { runFishCmd } from "~/plugins/lib/lib.ts"
+import { getAddedRemovedDiff, runFishCmd } from "~/plugins/lib/lib.ts"
 
 interface FisherDiff {
   isFisherInstalled: boolean

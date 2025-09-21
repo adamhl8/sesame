@@ -1,6 +1,6 @@
 import { $ } from "bun"
 
-import { resolvePath } from "~/core/lib/path"
+import { resolvePath } from "~/core/lib/path.ts"
 import { PluginBuilder } from "~/core/plugin/builder.ts"
 
 const sopsConfig = PluginBuilder.new<null>({ name: "sops Config" })

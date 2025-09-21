@@ -1,7 +1,7 @@
 import { $ } from "bun"
 
 import { PluginBuilder } from "~/core/plugin/builder.ts"
-import { getSopsSecret } from "~/plugins/lib/lib"
+import { getSopsSecret } from "~/plugins/lib/lib.ts"
 
 interface DockerLogin {
   registry?: string
