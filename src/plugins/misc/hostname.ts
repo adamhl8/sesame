@@ -7,7 +7,7 @@ interface HostnameDiff {
   localHostname?: { old: string; new: string }
 }
 
-const hostname = PluginBuilder.new<string>({ name: "hostname" })
+export const hostname = PluginBuilder.new<string>({ name: "hostname" })
   .diff<HostnameDiff>(async (ctx, _previous, newHostname) => {
     if (ctx.hostCtx.os === "darwin") {
       const { sudo } = ctx
@@ -29,5 +29,3 @@ const hostname = PluginBuilder.new<string>({ name: "hostname" })
     }
   })
   .build()
-
-export { hostname }

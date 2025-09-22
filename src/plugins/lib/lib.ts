@@ -4,14 +4,14 @@ import { $ } from "bun"
 import { resolvePath } from "~/core/lib/path.ts"
 import type { ClackLogger } from "~/core/logger.ts"
 
-async function getSopsSecret(pathString: string) {
+export async function getSopsSecret(pathString: string) {
   const keys = pathString.split(".").join("']['")
   return (await $`sops -d --extract "['${{ raw: keys }}']" ${resolvePath("./configs/secrets.yaml")}`.quiet())
     .text()
     .trim()
 }
 
-function getAddedRemovedDiff(input: string[], current: string[]) {
+export function getAddedRemovedDiff(input: string[], current: string[]) {
   const currentSet = new Set(current)
   const desiredSet = new Set(input)
 
@@ -23,7 +23,7 @@ function getAddedRemovedDiff(input: string[], current: string[]) {
 
 const EX_TEMPFAIL = 75
 
-function requestRestart(logger: ClackLogger, message: string) {
+export function requestRestart(logger: ClackLogger, message: string) {
   logger.warn(message)
   process.exit(EX_TEMPFAIL)
 }
@@ -40,8 +40,6 @@ export async function installAppFromZip(downloadUrl: string) {
   await $`rm ${zipPath}`.quiet()
 }
 
-function runFishCmd(cmd: string) {
+export function runFishCmd(cmd: string) {
   return $`fish -l -c ${cmd}`
 }
-
-export { getAddedRemovedDiff, requestRestart, getSopsSecret, runFishCmd }

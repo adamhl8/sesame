@@ -9,7 +9,7 @@ interface FisherDiff {
   removed: string[]
 }
 
-const fisher = PluginBuilder.new<string[]>({ name: "Fisher Plugins" })
+export const fisher = PluginBuilder.new<string[]>({ name: "Fisher Plugins" })
   .diff<FisherDiff>(async (_, _previous, plugins) => {
     const isFisherInstalled = (await runFishCmd("type -q fisher").nothrow()).exitCode === 0
     const current = isFisherInstalled
@@ -41,5 +41,3 @@ const fisher = PluginBuilder.new<string[]>({ name: "Fisher Plugins" })
     return
   })
   .build()
-
-export { fisher }

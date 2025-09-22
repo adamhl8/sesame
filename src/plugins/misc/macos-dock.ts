@@ -8,7 +8,7 @@ interface MacosDockDiff {
   removed: string[]
 }
 
-const macosDock = PluginBuilder.new<string[]>({ name: "MacOS Dock" })
+export const macosDock = PluginBuilder.new<string[]>({ name: "MacOS Dock" })
   .transform(async (items) =>
     items.map((item) => (item.startsWith("/Applications/") ? item : `/Applications/${item}.app`)),
   )
@@ -22,5 +22,3 @@ const macosDock = PluginBuilder.new<string[]>({ name: "MacOS Dock" })
     }
   })
   .build()
-
-export { macosDock }

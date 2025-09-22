@@ -25,7 +25,7 @@ const pluginContextSchema = type({
     raw: "string",
   },
 })
-type PluginContext = typeof pluginContextSchema.infer
+export type PluginContext = typeof pluginContextSchema.infer
 
 function getHostData(config: ValidatedConfig, host: string) {
   const hostContext = hostContextSchema({
@@ -59,7 +59,7 @@ function getPluginContext(hostContext: HostContext, pluginLogger: ClackLogger) {
  * @param logger wip
  * @returns `void`
  */
-async function main(sesameConfig: SesameConfig, logger: ClackLogger): Promise<Result> {
+export async function main(sesameConfig: SesameConfig, logger: ClackLogger): Promise<Result> {
   const config = validateConfig(sesameConfig)
   if (isErr(config)) return err("invalid config", config)
 
@@ -94,6 +94,3 @@ async function main(sesameConfig: SesameConfig, logger: ClackLogger): Promise<Re
 
   logger.success("Done!")
 }
-
-export { main }
-export type { PluginContext }

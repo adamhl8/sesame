@@ -9,7 +9,7 @@ interface DockerLogin {
   sopsPasswordKey: string
 }
 
-const dockerLogin = PluginBuilder.new<DockerLogin>({ name: "Docker Login" })
+export const dockerLogin = PluginBuilder.new<DockerLogin>({ name: "Docker Login" })
   .diff<true>((_, previous) => (previous ? undefined : true))
   .handle(async (_, __, input) => {
     const password = await getSopsSecret(input.sopsPasswordKey)
@@ -17,5 +17,3 @@ const dockerLogin = PluginBuilder.new<DockerLogin>({ name: "Docker Login" })
     await $`echo '${{ raw: password }}' | docker login ${{ raw: registry }}--username ${{ raw: input.username }} --password-stdin`
   })
   .build()
-
-export { dockerLogin }

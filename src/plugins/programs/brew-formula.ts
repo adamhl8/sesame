@@ -8,7 +8,7 @@ interface BrewFormulaDiff {
   removed: string[]
 }
 
-const brewFormula = PluginBuilder.new<string[]>({ name: "Brew Formula" })
+export const brewFormula = PluginBuilder.new<string[]>({ name: "Brew Formula" })
   .diff<BrewFormulaDiff>(async (_, _previous, formula) => {
     const current = (await $`brew ls --installed-on-request --formula -1`.quiet()).text().trim().split("\n")
     return getAddedRemovedDiff(formula, current)
@@ -25,5 +25,3 @@ const brewFormula = PluginBuilder.new<string[]>({ name: "Brew Formula" })
     await $`brew update`
   })
   .build()
-
-export { brewFormula }

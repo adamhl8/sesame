@@ -14,7 +14,7 @@ const appIdSplit = /\s+/
 
 // executing application must have permissions to manage apps
 
-const macApps = PluginBuilder.new<string[]>({ name: "Mac Apps" })
+export const macApps = PluginBuilder.new<string[]>({ name: "Mac Apps" })
   .diff<macAppsChange>(async (_, __, appIds) => {
     const current = (await $`mas list`.quiet())
       .text()
@@ -47,5 +47,3 @@ const macApps = PluginBuilder.new<string[]>({ name: "Mac Apps" })
     await $`mas upgrade`
   })
   .build()
-
-export { macApps }

@@ -13,7 +13,7 @@ async function resolveEnvVars(path: string) {
   return (await $`echo "${{ raw: path }}"`.quiet().text()).trim()
 }
 
-async function resolvePath(path: string) {
+export async function resolvePath(path: string) {
   let newPath = path.trim()
 
   // We want to keep trailing slashes that nodePath.resolve() will remove
@@ -26,5 +26,3 @@ async function resolvePath(path: string) {
 
   return newPath
 }
-
-export { resolvePath }

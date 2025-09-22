@@ -8,7 +8,7 @@ interface BrewCasksDiff {
   removed: string[]
 }
 
-const brewCasks = PluginBuilder.new<string[]>({ name: "Brew Casks" })
+export const brewCasks = PluginBuilder.new<string[]>({ name: "Brew Casks" })
   .diff<BrewCasksDiff>(async (_, _previous, casks) => {
     const current = (await $`brew ls --cask -1`.quiet()).text().trim().split("\n")
     return getAddedRemovedDiff(casks, current)
@@ -25,5 +25,3 @@ const brewCasks = PluginBuilder.new<string[]>({ name: "Brew Casks" })
     await $`brew update`
   })
   .build()
-
-export { brewCasks }

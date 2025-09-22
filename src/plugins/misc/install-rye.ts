@@ -10,7 +10,7 @@ interface InstallRyeOptions {
 
 // TODO: fix
 
-const installRye = PluginBuilder.new<InstallRyeOptions>({ name: "Install Rye" })
+export const installRye = PluginBuilder.new<InstallRyeOptions>({ name: "Install Rye" })
   .diff<InstallRyeOptions>((_, previous, input) => {
     if (!previous) return
     if (previous.pythonVersion === input.pythonVersion) return
@@ -31,5 +31,3 @@ const installRye = PluginBuilder.new<InstallRyeOptions>({ name: "Install Rye" })
     return
   })
   .build()
-
-export { installRye }

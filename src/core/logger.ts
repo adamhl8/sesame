@@ -38,7 +38,7 @@ interface LoggerOptions {
   scope?: string[]
 }
 
-class ClackLogger {
+export class ClackLogger {
   readonly #scope: string[]
 
   public constructor(options: LoggerOptions = {}) {
@@ -157,5 +157,3 @@ class ClackLogger {
     return shouldContinue
   }
 }
-
-export { ClackLogger }

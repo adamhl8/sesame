@@ -16,7 +16,7 @@ interface LinkFilesChange {
   removed: Link[]
 }
 
-const linkFiles = PluginBuilder.new<Link[]>({ name: "Link Files" })
+export const linkFiles = PluginBuilder.new<Link[]>({ name: "Link Files" })
   .transform(async (links) => await _expandAndResolveLinks(links))
   .diff<LinkFilesChange>(async (_, previous, links) => {
     const current: Link[] = []
@@ -63,12 +63,12 @@ async function _removeLink(link: Link) {
   await $`rm -f ${link.dest}`
 }
 
-async function _createLink(link: Link) {
+export async function _createLink(link: Link) {
   await fs.mkdir(path.dirname(link.dest), { recursive: true })
   await fs.symlink(link.source, link.dest)
 }
 
-async function _expandAndResolveLinks(links: Link[]) {
+export async function _expandAndResolveLinks(links: Link[]) {
   const expandedLinks: Link[] = []
   for (const link of links) {
     const glob = new Bun.Glob(await resolvePath(link.source))
@@ -98,5 +98,3 @@ async function _expandAndResolveLinks(links: Link[]) {
   }
   return expandedLinks
 }
-
-export { _createLink, _expandAndResolveLinks, linkFiles }

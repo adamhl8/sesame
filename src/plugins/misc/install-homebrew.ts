@@ -3,7 +3,7 @@ import { $ } from "bun"
 import { PluginBuilder } from "~/core/plugin/builder.ts"
 import { requestRestart } from "~/plugins/lib/lib.ts"
 
-const installHomebrew = PluginBuilder.new<null>({ name: "Homebrew" })
+export const installHomebrew = PluginBuilder.new<null>({ name: "Homebrew" })
   .diff<true>(() => (Bun.which("brew") ? undefined : true))
   .handle(async (ctx) => {
     ctx.logger.info("Installing Homebrew...")
@@ -17,5 +17,3 @@ const installHomebrew = PluginBuilder.new<null>({ name: "Homebrew" })
     return
   })
   .build()
-
-export { installHomebrew }

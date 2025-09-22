@@ -11,10 +11,8 @@ async function useKekaHelper(ctx: PluginContext) {
   await $`rm -rf /Applications/KekaExternalHelper.app`.quiet()
 }
 
-const kekaHelper = PluginBuilder.new<null>({ name: "Keka Helper" })
+export const kekaHelper = PluginBuilder.new<null>({ name: "Keka Helper" })
   .diff<true>((_, previous) => (previous === null ? undefined : true))
   .handle(useKekaHelper)
   .update(useKekaHelper)
   .build()
-
-export { kekaHelper }

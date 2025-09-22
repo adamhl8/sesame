@@ -29,7 +29,7 @@ function isValidJsonValue(value: unknown): value is JsonValue {
  * @param plugin wip
  * @returns `void`
  */
-async function getInput(plugin: PluginInstance): Promise<Result<JsonValue>> {
+export async function getInput(plugin: PluginInstance): Promise<Result<JsonValue>> {
   let input = await attempt(
     async () => (plugin.transform ? await plugin.transform(plugin.input()) : plugin.input()) as unknown,
   )
@@ -47,7 +47,11 @@ async function getInput(plugin: PluginInstance): Promise<Result<JsonValue>> {
  * @param input wip
  * @returns `void`
  */
-async function getDiff(plugin: PluginInstance, context: PluginContext, input: JsonValue): Promise<Result<unknown>> {
+export async function getDiff(
+  plugin: PluginInstance,
+  context: PluginContext,
+  input: JsonValue,
+): Promise<Result<unknown>> {
   const { hostCtx } = context
   const { host } = hostCtx
 
@@ -66,7 +70,7 @@ async function getDiff(plugin: PluginInstance, context: PluginContext, input: Js
  * @param context wip
  * @returns `void`
  */
-async function handlePlugin(plugin: PluginInstance, context: PluginContext): Promise<Result> {
+export async function handlePlugin(plugin: PluginInstance, context: PluginContext): Promise<Result> {
   const { hostCtx, logger } = context
   const { host } = hostCtx
 
@@ -108,5 +112,3 @@ function getDiffString(diff: unknown) {
   const hasMultipleLines = diffString.includes("\n")
   return (hasMultipleLines ? "\n" : "") + diffString
 }
-
-export { handlePlugin, getInput, getDiff }

@@ -3,7 +3,7 @@ import { $ } from "bun"
 import { PluginBuilder } from "~/core/plugin/builder.ts"
 import { getSopsSecret } from "~/plugins/lib/lib.ts"
 
-const ssh = PluginBuilder.new<null>({ name: "SSH" })
+export const ssh = PluginBuilder.new<null>({ name: "SSH" })
   .diff<true>((_, previous) => (previous === null ? undefined : true))
   .handle(async (ctx) => {
     $`mkdir -p ~/.ssh/`
@@ -16,5 +16,3 @@ const ssh = PluginBuilder.new<null>({ name: "SSH" })
     await $`chmod 644 ~/.ssh/id_ed25519.pub`
   })
   .build()
-
-export { ssh }

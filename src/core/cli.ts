@@ -11,7 +11,7 @@ interface CliArgs {
 /**
  * @returns CLI args
  */
-function getArgv() {
+export function getArgv() {
   return cli({
     name: "sesame",
     parameters: ["<host...>"],
@@ -22,7 +22,7 @@ function getArgv() {
  * @param config temp
  * @returns validated config
  */
-function parseCliArgs(config: SesameConfig): Result<CliArgs> {
+export function parseCliArgs(config: SesameConfig): Result<CliArgs> {
   const argv = getArgv()
 
   const hosts = argv._.host
@@ -37,5 +37,3 @@ function parseCliArgs(config: SesameConfig): Result<CliArgs> {
 
   return cliArgs
 }
-
-export { parseCliArgs, getArgv }

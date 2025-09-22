@@ -41,6 +41,4 @@ class StateDb {
   }
 }
 
-const db = new StateDb()
-
-export { db }
+export const db = new StateDb()

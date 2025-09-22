@@ -24,7 +24,7 @@ type Plugin<Input, TInput, Diff> = undefined extends Input // if Input is undefi
   ? (input?: Input) => PluginInstance<Input, TInput, Diff> // then input is optional
   : (input: Input) => PluginInstance<Input, TInput, Diff> // else, input is required
 
-class PluginBuilder<IInput = undefined, TInput = IInput, Diff = unknown> {
+export class PluginBuilder<IInput = undefined, TInput = IInput, Diff = unknown> {
   private readonly details: PluginDetails
   private transformFn?: PluginTransform<IInput, TInput>
   private diffFn?: PluginDiff<TInput, Diff>
@@ -82,5 +82,3 @@ class PluginBuilder<IInput = undefined, TInput = IInput, Diff = unknown> {
     return plugin as Plugin<IInput, TInput, Diff>
   }
 }
-
-export { PluginBuilder }

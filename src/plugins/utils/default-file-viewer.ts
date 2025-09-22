@@ -7,7 +7,7 @@ interface DefaultFileViewerDiff {
   addHandler?: boolean
 }
 
-const defaultFileViewer = PluginBuilder.new<string>({ name: "Default File Viewer", printDiff: false })
+export const defaultFileViewer = PluginBuilder.new<string>({ name: "Default File Viewer", printDiff: false })
   .diff<DefaultFileViewerDiff>(async (_, _previous, bundleId) => {
     const fileViewer = (await $`defaults read -g NSFileViewer`.quiet()).text().trim()
 
@@ -32,5 +32,3 @@ const defaultFileViewer = PluginBuilder.new<string>({ name: "Default File Viewer
     }
   })
   .build()
-
-export { defaultFileViewer }

@@ -2,7 +2,7 @@ import { $ } from "bun"
 
 import { PluginBuilder } from "~/core/plugin/builder.ts"
 
-const fnm = PluginBuilder.new<null>({ name: "fnm" })
+export const fnm = PluginBuilder.new<null>({ name: "fnm" })
   .diff<true>((_, previous) => (previous === null ? undefined : true))
   .handle(async () => {
     await $`fnm install --latest`
@@ -12,5 +12,3 @@ const fnm = PluginBuilder.new<null>({ name: "fnm" })
     return
   })
   .build()
-
-export { fnm }

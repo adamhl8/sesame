@@ -3,7 +3,7 @@ import { $ } from "bun"
 import { resolvePath } from "~/core/lib/path.ts"
 import { PluginBuilder } from "~/core/plugin/builder.ts"
 
-const sopsConfig = PluginBuilder.new<null>({ name: "sops Config" })
+export const sopsConfig = PluginBuilder.new<null>({ name: "sops Config" })
   .diff<true>((_, previous) => (previous === null ? undefined : true))
   .handle(async (ctx) => {
     await $`mkdir -p ~/.config/sops/age/`
@@ -12,5 +12,3 @@ const sopsConfig = PluginBuilder.new<null>({ name: "sops Config" })
     await $`chmod 600 ~/.config/sops/age/keys.txt`
   })
   .build()
-
-export { sopsConfig }

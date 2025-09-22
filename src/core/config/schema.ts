@@ -9,13 +9,13 @@ const pluginDetails = type({
   /** @default true */
   "printDiff?": "boolean",
 })
-type PluginDetails = typeof pluginDetails.infer
+export type PluginDetails = typeof pluginDetails.infer
 
 type PluginInput<Input> = () => Input
 
-type PluginTransform<Input, TInput> = (input: Input) => AsyncOrSync<TInput>
+export type PluginTransform<Input, TInput> = (input: Input) => AsyncOrSync<TInput>
 
-type PluginDiff<TInput, Diff> = (
+export type PluginDiff<TInput, Diff> = (
   ctx: PluginContext,
   // previous is undefined if the plugin has no previous state (e.g. first run)
   // previous is null if the plugin's saved state is null (i.e. the plugin takes no (or optional) input)
@@ -23,9 +23,9 @@ type PluginDiff<TInput, Diff> = (
   input: TInput,
 ) => AsyncOrSync<Diff | undefined>
 
-type PluginHandle<Diff, TInput> = (ctx: PluginContext, diff: Diff, input: TInput) => AsyncOrSync<void>
+export type PluginHandle<Diff, TInput> = (ctx: PluginContext, diff: Diff, input: TInput) => AsyncOrSync<void>
 
-type PluginUpdate = (ctx: PluginContext) => AsyncOrSync<void>
+export type PluginUpdate = (ctx: PluginContext) => AsyncOrSync<void>
 
 /*
   We can't use unknown here as the default for the type arguments. The plugins array of HostConfig is typed as PluginInstance[], which naturally would be PluginInstance<unknown, unknown, unknown>[] if we used unknown.
@@ -33,7 +33,7 @@ type PluginUpdate = (ctx: PluginContext) => AsyncOrSync<void>
   TypeScript correctly complains that <string, string, string> is not assignable to <unknown, unknown, unknown>.
 */
 // biome-ignore lint/suspicious/noExplicitAny: ignore
-interface PluginInstance<Input = any, TInput = Input, Diff = any> {
+export interface PluginInstance<Input = any, TInput = Input, Diff = any> {
   details: PluginDetails
   input: PluginInput<Input>
   transform: PluginTransform<Input, TInput> | undefined
@@ -79,11 +79,8 @@ const hostConfigSchema = type({
     }),
 }).describe("a host config object")
 
-const sesameConfigSchema = type
+export const sesameConfigSchema = type
   .Record("string", hostConfigSchema)
   .narrow((config) => Object.keys(config).length > 0)
   .describe("an object of only host config objects")
-type SesameConfig = typeof sesameConfigSchema.infer
-
-export { sesameConfigSchema }
-export type { PluginDetails, PluginDiff, PluginHandle, PluginInstance, PluginTransform, PluginUpdate, SesameConfig }
+export type SesameConfig = typeof sesameConfigSchema.infer

@@ -8,7 +8,7 @@ import { attempt, err, isErr } from "ts-explicit-errors"
 /**
  * @returns wip
  */
-async function bootstrap(): Promise<Result> {
+export async function bootstrap(): Promise<Result> {
   // When running the built binary, Bun.main is something like "/$bunfs/root/foo.ts"
   // So we have to get Bun.main during bootstrap and pass it to the binary via environment variable
   const SESAME_ROOT_DIR = path.dirname(Bun.main)
@@ -60,5 +60,3 @@ async function bootstrap(): Promise<Result> {
 
   await rm(`${SESAME_ROOT_DIR}/sesame`, { force: true })
 }
-
-export { bootstrap }

@@ -6,14 +6,14 @@ import { isErr } from "ts-explicit-errors"
 /**
  * @param result A `Result` expected to be a `CtxError`
  */
-function expectErr<T>(result: Result<T>): asserts result is CtxError {
+export function expectErr<T>(result: Result<T>): asserts result is CtxError {
   expect(isErr(result)).toBe(true)
 }
 
 /**
  * @param result A `Result` expected to be `T`
  */
-function expectNotErr<T>(result: Result<T>): asserts result is T {
+export function expectNotErr<T>(result: Result<T>): asserts result is T {
   expect(isErr(result)).toBe(false)
 }
 
@@ -31,5 +31,3 @@ function expectNotErr<T>(result: Result<T>): asserts result is T {
 //     scope: jest.fn(),
 //   }
 // }
-
-export { expectErr, expectNotErr }

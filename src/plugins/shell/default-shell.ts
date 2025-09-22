@@ -8,7 +8,7 @@ interface DefaultShellDiff {
   changeShell?: boolean
 }
 
-const defaultShell = PluginBuilder.new<string>({ name: "Default Shell", printDiff: false })
+export const defaultShell = PluginBuilder.new<string>({ name: "Default Shell", printDiff: false })
   .transform(resolvePath)
   .diff<DefaultShellDiff>(async (_, previous, shellPath) => {
     const changes: DefaultShellDiff = {}
@@ -30,5 +30,3 @@ const defaultShell = PluginBuilder.new<string>({ name: "Default Shell", printDif
     if (diff.changeShell) await $`chsh -s ${shellPath}`
   })
   .build()
-
-export { defaultShell }

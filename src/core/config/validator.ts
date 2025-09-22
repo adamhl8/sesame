@@ -11,13 +11,13 @@ function isArkErrors(value: unknown): value is ArkErrors {
   return value instanceof type.errors
 }
 
-type ValidatedConfig = Tagged<SesameConfig, "validated">
+export type ValidatedConfig = Tagged<SesameConfig, "validated">
 
 /**
  * @param config temp
  * @returns validated config
  */
-function validateConfig(config: SesameConfig): Result<ValidatedConfig> {
+export function validateConfig(config: SesameConfig): Result<ValidatedConfig> {
   const validatedConfig = sesameConfigSchema(config)
   if (isArkErrors(validatedConfig)) {
     const errorMessages = validatedConfig.summary
@@ -49,6 +49,3 @@ function prependPluginValidationErrorWithPluginName(errorMessage: string, config
 
   return `(${pluginName}) ${errorMessage}`
 }
-
-export { validateConfig }
-export type { ValidatedConfig }
